@@ -87,8 +87,6 @@
     .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 14px; margin-top: auto; font-size: 12px; color: #777; }
     .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
 
-    .loading-state { text-align: center; padding: 50px 20px; color: #777; font-size: 14px; }
-
     .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
     .footer-inner { max-width: 1000px; margin: auto; }
     .footer-title { text-align: center; font-weight: 900; text-transform: uppercase; font-size: 16px; color: #fff; }
@@ -139,7 +137,7 @@
     </div>
 
     <div class="grid" id="articlesGrid">
-      <div class="loading-state" id="loadingText">Syncing guides from repository...</div>
+      <!-- Auto-Bot will automatically list all articles here -->
     </div>
   </main>
 
@@ -153,7 +151,6 @@
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="california-privacy.html">California Privacy Statement</a>
         <a href="cookie-notice.html">Cookie Notice</a>
-        <a href="cookie-settings.html">Cookie Settings</a>
       </div>
 
       <div class="footer-title" style="margin-top:42px">Related Sites</div>
@@ -162,15 +159,6 @@
         <a href="https://pdfgridbox.in" target="_blank" rel="noopener">PDFGridBox.in</a>
         <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener">BestTools</a>
         <a href="https://gujaratfastalert.in" target="_blank" rel="noopener">GujaratFastAlert.in</a>
-      </div>
-
-      <div class="footer-title" style="margin-top:42px">Follow / Connect</div>
-      <div class="footer-line"></div>
-      <div class="social">
-        <a href="mailto:pdfgridbox@gmail.com" aria-label="Email">✉</a>
-        <a href="https://pdfgridbox.in" target="_blank" rel="noopener" aria-label="Website">P</a>
-        <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener" aria-label="BestTools">B</a>
-        <a href="https://gujaratfastalert.in" target="_blank" rel="noopener" aria-label="GujaratFastAlert">G</a>
       </div>
 
       <div class="copyright">
@@ -183,68 +171,6 @@
   </footer>
 
   <script>
-    // GitHub Repo Configuration (Aapke GitHub account ke anusaar)
-    const GITHUB_USER = "vvanrajsinh-vaghela";
-    const GITHUB_REPO = "tempmail"; // Agar repo ka naam alag ho toh yahan badal sakte hain
-
-    function cleanTitle(fileName) {
-      return fileName
-        .replace(".html", "")
-        .replace(/^\d+-/, "") // 001-, 002- ko title se remove karega
-        .split("-")
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
-    }
-
-    async function loadAllGuides() {
-      const grid = document.getElementById('articlesGrid');
-      try {
-        const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides`);
-        if (!response.ok) throw new Error("API Fetch Error");
-        const files = await response.json();
-        
-        const htmlFiles = files
-          .filter(f => f.name.endsWith('.html'))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        if (htmlFiles.length === 0) {
-          throw new Error("No files in folder");
-        }
-
-        grid.innerHTML = htmlFiles.map(file => {
-          const title = cleanTitle(file.name);
-          return `
-            <a href="guides/${file.name}" class="card article-item">
-              <div>
-                <span class="tag">Guide</span>
-                <h2>${title}</h2>
-                <p>Read step-by-step verification instructions and safety guidelines on ${title.toLowerCase()}.</p>
-              </div>
-              <div class="card-footer">
-                <span>5 min read</span>
-                <span class="read-more">Read Guide →</span>
-              </div>
-            </a>
-          `;
-        }).join('');
-      } catch (err) {
-        // Fallback: Agar API limit ya connection slow ho toh live card turant dikhega
-        grid.innerHTML = `
-          <a href="guides/001-temporary-email-for-otp.html" class="card article-item">
-            <div>
-              <span class="tag">OTP & Verification</span>
-              <h2>Temporary Email for OTP: How to Receive Verification Codes Safely</h2>
-              <p>Learn how to safely use disposable email for receiving short-term OTPs and verification messages.</p>
-            </div>
-            <div class="card-footer">
-              <span>5 min read</span>
-              <span class="read-more">Read Guide →</span>
-            </div>
-          </a>
-        `;
-      }
-    }
-
     function filterArticles() {
       const input = document.getElementById('articleSearch').value.toLowerCase();
       const articles = document.querySelectorAll('.article-item');
@@ -253,8 +179,6 @@
         article.style.display = text.includes(input) ? "flex" : "none";
       });
     }
-
-    loadAllGuides();
   </script>
 </body>
 </html>
