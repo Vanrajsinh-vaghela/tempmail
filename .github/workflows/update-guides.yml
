@@ -1,0 +1,63 @@
+name: Auto Update Guides List
+
+on:
+  push:
+    paths:
+      - 'guides/**'
+      - '.github/workflows/update-guides.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-guides:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Generate Guides Cards
+        run: |
+          python3 -c "
+          import os, glob, re
+
+          files = sorted(glob.glob('guides/*.html'))
+          cards = []
+
+          for f in files:
+              fname = os.path.basename(f)
+              title = re.sub(r'^\d+-', '', fname.replace('.html', '')).replace('-', ' ').title()
+              card_html = f'''      <a href=\"guides/{fname}\" class=\"card article-item\">
+              <div>
+                <span class=\"tag\">Guide</span>
+                <h2>{title}</h2>
+                <p>Read step-by-step verification instructions and safety guidelines on {title.lower()}.</p>
+              </div>
+              <div class=\"card-footer\">
+                <span>5 min read</span>
+                <span class=\"read-more\">Read Guide →</span>
+              </div>
+            </a>'''
+              cards.append(card_html)
+
+          content = '\n'.join(cards)
+          
+          with open('guide.html', 'r', encoding='utf-8') as gf:
+              html = gf.read()
+
+          pattern = r'(<div class=\"grid\" id=\"articlesGrid\">)(.*?)(</div>\s*</main>)'
+          replacement = r'\1\n' + content + r'\n    \3'
+          new_html = re.sub(pattern, replacement, html, flags=re.DOTALL)
+
+          with open('guide.html', 'w', encoding='utf-8') as gf:
+              gf.write(new_html)
+          "
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add guide.html
+          git commit -m "Auto-updated guide.html with latest articles" || exit 0
+          git push
