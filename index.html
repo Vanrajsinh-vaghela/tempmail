@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temp Mail - Free Disposable Temporary Email</title>
+  <meta name="description" content="Get a free temporary disposable email address instantly. Protect your privacy from spam and OTP verifications.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center p-4">
+
+  <!-- Header -->
+  <header class="w-full max-w-3xl text-center py-6">
+    <h1 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-300">
+      ⚡ TempMail Box
+    </h1>
+    <p class="text-xs text-slate-400 mt-1">Instant, Anonymous & Disposable Email Address</p>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-3xl space-y-6">
+
+    <!-- Email Generator Box -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-xl space-y-4">
+      <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Your Temporary Email Address</div>
+      
+      <div class="flex flex-col sm:flex-row gap-2">
+        <input id="emailDisplay" type="text" readonly 
+          class="w-full bg-slate-950 border border-slate-700 text-teal-400 font-mono text-base px-4 py-3 rounded-xl focus:outline-none select-all"
+          value="Generating address...">
+        
+        <div class="flex gap-2">
+          <button onclick="copyEmail()" class="flex-1 sm:flex-initial bg-blue-600 hover:bg-blue-500 text-white font-medium px-5 py-3 rounded-xl flex items-center justify-center gap-2 transition">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+          <button onclick="generateNewEmail()" class="bg-slate-700 hover:bg-slate-600 text-white font-medium px-4 py-3 rounded-xl flex items-center justify-center transition" title="Change Address">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </div>
+      </div>
+      <div id="copyToast" class="hidden text-xs text-green-400 font-medium"><i class="fa-solid fa-check"></i> Email copied to clipboard!</div>
+    </div>
+
+    <!-- Ad Placeholder 1 -->
+    <div class="w-full py-3 bg-slate-800/40 border border-dashed border-slate-700 rounded-xl text-center text-xs text-slate-500">
+      Ad Space (Google AdSense / Banner)
+    </div>
+
+    <!-- Inbox Messages Section -->
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5 shadow-xl">
+      <div class="flex justify-between items-center mb-4 border-b border-slate-700/60 pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+          <span class="text-sm font-semibold">Live Inbox</span>
+        </div>
+        <button onclick="fetchMessages()" class="text-xs text-slate-400 hover:text-white flex items-center gap-1">
+          <i class="fa-solid fa-rotate-right" id="refreshIcon"></i> Auto-refreshing
+        </button>
+      </div>
+
+      <!-- Messages List -->
+      <div id="messageList" class="space-y-3">
+        <div class="text-center py-10 text-slate-500 text-sm">
+          <i class="fa-regular fa-envelope-open text-3xl mb-2 block"></i>
+          Waiting for incoming emails...
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Script Engine -->
+  <script>
+    const WORKER_URL = "https://tempmail-worker.shreeramstudiokatwad.workers.dev";
+    const EMAIL_DOMAIN = "tempmail.pdfgridbox.in";
+    let currentEmail = localStorage.getItem("current_temp_mail") || "";
+
+    function randomString(length = 8) {
+      return Math.random().toString(36).substring(2, 2 + length);
+    }
+
+    function generateNewEmail() {
+      currentEmail = `${randomString(8)}@${EMAIL_DOMAIN}`;
+      localStorage.setItem("current_temp_mail", currentEmail);
+      document.getElementById("emailDisplay").value = currentEmail;
+      fetchMessages();
+    }
+
+    function copyEmail() {
+      const emailInput = document.getElementById("emailDisplay");
+      navigator.clipboard.writeText(emailInput.value);
+      const toast = document.getElementById("copyToast");
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 2000);
+    }
+
+    async function fetchMessages() {
+      if (!currentEmail) return;
+      const refreshIcon = document.getElementById("refreshIcon");
+      if (refreshIcon) refreshIcon.classList.add("fa-spin");
+
+      try {
+        const res = await fetch(`${WORKER_URL}/api/messages?email=${encodeURIComponent(currentEmail)}`);
+        const messages = await res.json();
+        renderMessages(messages);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove("fa-spin");
+      }
+    }
+
+    function renderMessages(messages) {
+      const listContainer = document.getElementById("messageList");
+      if (!messages || messages.length === 0) {
+        listContainer.innerHTML = `
+          <div class="text-center py-10 text-slate-500 text-sm">
+            <i class="fa-regular fa-envelope-open text-3xl mb-2 block"></i>
+            Waiting for incoming emails... (Auto checking)
+          </div>`;
+        return;
+      }
+
+      listContainer.innerHTML = messages.map(msg => `
+        <div class="bg-slate-900 border border-slate-700/80 rounded-xl p-4 transition hover:border-slate-600">
+          <div class="flex justify-between items-start mb-2">
+            <span class="text-xs font-mono text-teal-400">${escapeHtml(msg.from)}</span>
+            <span class="text-[10px] text-slate-500">${new Date(msg.date).toLocaleTimeString()}</span>
+          </div>
+          <div class="text-sm font-semibold text-white mb-2">${escapeHtml(msg.subject)}</div>
+          <div class="text-xs text-slate-300 bg-slate-950 p-3 rounded-lg font-mono whitespace-pre-wrap max-h-48 overflow-y-auto">${escapeHtml(msg.body)}</div>
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(text) {
+      return (text || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Init
+    if (!currentEmail) {
+      generateNewEmail();
+    } else {
+      document.getElementById("emailDisplay").value = currentEmail;
+      fetchMessages();
+    }
+
+    // Auto poll inbox every 5 seconds
+    setInterval(fetchMessages, 5000);
+  </script>
+</body>
+</html>
