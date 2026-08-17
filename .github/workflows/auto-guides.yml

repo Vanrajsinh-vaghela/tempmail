@@ -1,0 +1,94 @@
+name: Auto Update Guides and Sitemap
+
+on:
+  push:
+    paths:
+      - 'guides/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-guides:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Auto Generate Cards and Sitemap
+        run: |
+          python3 -c "
+          import os, glob, re
+
+          files = sorted(glob.glob('guides/*.html'))
+          cards = []
+          sitemap_urls = [
+              'https://tempmail.pdfgridbox.in/',
+              'https://tempmail.pdfgridbox.in/guide.html'
+          ]
+
+          for f in files:
+              fname = os.path.basename(f)
+              with open(f, 'r', encoding='utf-8') as fp:
+                  html_text = fp.read()
+
+              # Extract Title
+              t_match = re.search(r'<title>(.*?)</title>', html_text, re.IGNORECASE | re.DOTALL)
+              if t_match:
+                  raw_title = t_match.group(1).split('—')[0].split('|')[0].split(':')[0].strip()
+                  title = raw_title if len(raw_title) > 5 else re.sub(r'^\d+-', '', fname.replace('.html', '')).replace('-', ' ').title()
+              else:
+                  title = re.sub(r'^\d+-', '', fname.replace('.html', '')).replace('-', ' ').title()
+
+              # Extract Meta Description
+              d_match = re.search(r'<meta\s+name=[\"\']description[\"\']\s+content=[\"\'](.*?)[\"\']', html_text, re.IGNORECASE)
+              desc = d_match.group(1).strip() if d_match else f'Complete step-by-step tutorial and safety guide on {title.lower()}.'
+
+              # Tag detection
+              tag = 'Guide'
+              low = fname.lower()
+              if 'otp' in low: tag = 'OTP & Verification'
+              elif 'discord' in low: tag = 'Discord'
+              elif 'what-is' in low or 'how' in low: tag = 'Architecture'
+
+              card = f'''      <!-- Auto Card: {fname} -->
+            <a href=\"guides/{fname}\" class=\"card article-item\">
+              <div>
+                <span class=\"tag\">{tag}</span>
+                <h2>{title}</h2>
+                <p>{desc}</p>
+              </div>
+              <div class=\"card-footer\">
+                <span>5 min read</span>
+                <span class=\"read-more\">Read Guide →</span>
+              </div>
+            </a>'''
+              cards.append(card)
+              sitemap_urls.append(f'https://tempmail.pdfgridbox.in/guides/{fname}')
+
+          # Update guide.html
+          cards_html = '\n'.join(cards)
+          if os.path.exists('guide.html'):
+              with open('guide.html', 'r', encoding='utf-8') as gf:
+                  g_content = gf.read()
+
+              pattern = r'(<div class=\"grid\" id=\"articlesGrid\">)(.*?)(</div>\s*</main>)'
+              new_g = re.sub(pattern, r'\1\n' + cards_html + r'\n    \3', g_content, flags=re.DOTALL)
+              with open('guide.html', 'w', encoding='utf-8') as gf:
+                  gf.write(new_g)
+
+          # Update sitemap.xml
+          sitemap_items = '\n'.join([f'  <url>\n    <loc>{u}</loc>\n    <priority>{\"1.0\" if u.endswith(\".in/\") else \"0.8\"}</priority>\n  </url>' for u in sitemap_urls])
+          sitemap_full = f'<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n{sitemap_items}\n</urlset>'
+          with open('sitemap.xml', 'w', encoding='utf-8') as sf:
+              sf.write(sitemap_full)
+          "
+
+      - name: Commit and Push Updates
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add guide.html sitemap.xml
+          git commit -m "🤖 Auto-updated guide.html & sitemap.xml with latest articles" || exit 0
+          git push
