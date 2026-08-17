@@ -1,31 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>TempMail Box - User Guides & Articles</title>
-<!-- Copy CSS from index.html here for consistent design -->
-<style>
-  /* Use same CSS as index.html */
-  :root{--bg:#050505;--gold:#f2dc78;--text:#f5f5f5;}
-  body{background:var(--bg);color:var(--text);font-family:Inter,sans-serif;padding:40px 20px;}
-  .container{max-width:800px;margin:auto;}
-  .link-card{border:1px solid #222;padding:15px;margin-bottom:10px;border-radius:10px;display:block;}
-  .link-card:hover{border-color:var(--gold);}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Guides & Knowledge Base — TempMail Box</title>
+  <meta name="description" content="Explore comprehensive guides, tutorials, and tips on using disposable temporary email addresses, receiving OTPs, and protecting online privacy.">
+  <link rel="canonical" href="https://tempmail.pdfgridbox.in/guide.html">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0b0b0b;
+      --panel2: #101010;
+      --text: #f5f5f5;
+      --muted: #a0a0a0;
+      --gold: #f2dc78;
+      --gold2: #b77b45;
+      --line: #222222;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+    
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(5,5,5,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #181818;
+    }
+    .header-inner {
+      max-width: 1100px; margin: auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #fff;
+    }
+    .brand-mark {
+      width: 38px; height: 38px; border: 2px solid var(--gold);
+      border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: var(--gold);
+    }
+    .brand-mark span { font-size: 15px; }
+    .nav { display: flex; gap: 20px; font-size: 13px; color: #d5d5d5; }
+    .nav a:hover { color: var(--gold); }
+
+    /* Layout */
+    .page { max-width: 1000px; margin: auto; padding: 50px 20px 80px; }
+    .hero { text-align: center; padding: 10px 0 35px; }
+    .eyebrow {
+      font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px;
+    }
+    h1 { font-size: clamp(32px, 6vw, 50px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; letter-spacing: -.03em; color: #fff; }
+    .gold-line {
+      height: 3px; max-width: 480px; margin: 18px auto 26px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c);
+    }
+    .hero p { color: var(--muted); font-size: 16px; max-width: 620px; margin: auto; }
+
+    /* Search Bar */
+    .search-box {
+      max-width: 540px; margin: 0 auto 40px; position: relative;
+    }
+    .search-input {
+      width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
+      border-radius: 12px; padding: 14px 18px 14px 44px; color: #fff;
+      font-size: 15px; font-family: inherit; outline: none; transition: .2s;
+    }
+    .search-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(242, 220, 120, 0.15); }
+    .search-icon {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      color: #666; font-size: 16px;
+    }
+
+    /* Article Cards Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: linear-gradient(180deg, #0d0d0d, #080808);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #443722;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+    }
+    .tag {
+      font-size: 10px; text-transform: uppercase; letter-spacing: .12em;
+      font-weight: 800; color: var(--gold); background: #18140a;
+      border: 1px solid #3d3118; padding: 4px 10px; border-radius: 6px;
+      display: inline-block; margin-bottom: 14px;
+    }
+    .card h2 {
+      font-size: 18px; line-height: 1.4; margin: 0 0 10px;
+      font-weight: 700; color: #fff;
+    }
+    .card:hover h2 { color: var(--gold); }
+    .card p {
+      font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 18px;
+    }
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid #161616; padding-top: 14px; margin-top: auto;
+      font-size: 12px; color: #777;
+    }
+    .read-more {
+      font-weight: 700; color: var(--gold); font-size: 12px;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
+    .footer-inner { max-width: 1000px; margin: auto; }
+    .footer-title { text-align: center; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; font-size: 16px; color: #fff; }
+    .footer-line { height: 3px; max-width: 510px; margin: 16px auto 25px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; color: #cfcfcf; font-size: 14px; align-items: center; }
+    .footer-links a:hover { color: var(--gold); }
+    .social { display: flex; justify-content: center; gap: 14px; margin: 22px 0; }
+    .social a { width: 42px; height: 42px; border: 1px solid #333; border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: #fff; }
+    .social a:hover { border-color: var(--gold); color: var(--gold); }
+    .copyright { text-align: center; color: #777; font-size: 12px; margin-top: 28px; }
+
+    @media (max-width: 700px) {
+      .header-inner { padding: 12px 14px; }
+      .nav { display: none; }
+      .page { padding: 35px 16px 60px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<div class="container">
-  <h1>User Guides & Articles</h1>
-  <p>Read our comprehensive guides on using temporary email effectively.</p>
-  
-  <!-- Yahan aap apne 300 articles list karenge -->
-  <a href="guides/temporary-email-for-otp.html" class="link-card">
-    <h3>Temporary Email for OTP: How to Receive Codes Safely</h3>
-  </a>
-  
-  <a href="guides/next-article.html" class="link-card">
-    <h3>[Article Title 2]</h3>
-  </a>
-</div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-mark"><span>TM</span></div>
+        <span>TempMail Box</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Temp Mail</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="page">
+    <section class="hero">
+      <span class="eyebrow">Knowledge Base & Guides</span>
+      <h1>User Guides & Articles</h1>
+      <div class="gold-line"></div>
+      <p>Explore step-by-step tutorials, safety tips, and guides on using temporary disposable email addresses for OTP verification.</p>
+    </section>
+
+    <!-- Search Input -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="articleSearch" class="search-input" placeholder="Search guides (e.g. OTP, verification, Discord)..." onkeyup="filterArticles()">
+    </div>
+
+    <!-- Articles Grid -->
+    <div class="grid" id="articlesGrid">
+
+      <!-- Article 1 (Active Live Article) -->
+      <a href="guides/temporary-email-for-otp.html" class="card article-item">
+        <div>
+          <span class="tag">OTP & Verification</span>
+          <h2>Temporary Email for OTP: How to Receive Verification Codes Safely</h2>
+          <p>Learn how to safely use disposable email for receiving short-term OTPs and verification messages without risking primary inbox privacy.</p>
+        </div>
+        <div class="card-footer">
+          <span>5 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- Article 2 (Slot) -->
+      <a href="guides/temporary-email-for-verification.html" class="card article-item">
+        <div>
+          <span class="tag">Security</span>
+          <h2>How Does Temporary Email Protect Your Privacy Online?</h2>
+          <p>Understand how disposable email services prevent data leaks, eliminate marketing spam, and protect your primary mailbox.</p>
+        </div>
+        <div class="card-footer">
+          <span>4 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- Article 3 (Slot) -->
+      <a href="guides/how-does-temporary-email-work.html" class="card article-item">
+        <div>
+          <span class="tag">Architecture</span>
+          <h2>How Does Serverless Temporary Email Work Behind the Scenes?</h2>
+          <p>A complete technical breakdown of serverless mail routing, MX records, and real-time database delivery with zero persistence.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-title">Quick Links</div>
+      <div class="footer-line"></div>
+      <div class="footer-links">
+        <a href="contact.html">Contact Us</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="california-privacy.html">California Privacy Statement</a>
+        <a href="cookie-notice.html">Cookie Notice</a>
+        <a href="cookie-settings.html">Cookie Settings</a>
+      </div>
+
+      <div class="footer-title" style="margin-top:42px">Related Sites</div>
+      <div class="footer-line"></div>
+      <div class="footer-links">
+        <a href="https://pdfgridbox.in" target="_blank" rel="noopener">PDFGridBox.in</a>
+        <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener">BestTools</a>
+        <a href="https://gujaratfastalert.in" target="_blank" rel="noopener">GujaratFastAlert.in</a>
+      </div>
+
+      <div class="footer-title" style="margin-top:42px">Follow / Connect</div>
+      <div class="footer-line"></div>
+      <div class="social">
+        <a href="mailto:pdfgridbox@gmail.com" aria-label="Email">✉</a>
+        <a href="https://pdfgridbox.in" target="_blank" rel="noopener" aria-label="Website">P</a>
+        <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener" aria-label="BestTools">B</a>
+        <a href="https://gujaratfastalert.in" target="_blank" rel="noopener" aria-label="GujaratFastAlert">G</a>
+      </div>
+
+      <div class="copyright">
+        © 2026 TempMail Box. All Rights Reserved.<br>
+        <span style="display:inline-block;margin-top:8px;color:#a8a8a8;">
+          Managed and Published by <strong style="color:var(--gold);">Vanrajsinh Vaghela</strong>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterArticles() {
+      const input = document.getElementById('articleSearch').value.toLowerCase();
+      const articles = document.querySelectorAll('.article-item');
+      articles.forEach(article => {
+        const text = article.innerText.toLowerCase();
+        article.style.display = text.includes(input) ? "flex" : "none";
+      });
+    }
+  </script>
 </body>
 </html>
