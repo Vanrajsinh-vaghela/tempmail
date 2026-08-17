@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>User Guides & Knowledge Base — TempMail Box</title>
-  <meta name="description" content="Explore comprehensive guides, tutorials, and tips on using disposable temporary email addresses, receiving OTPs, and protecting online privacy.">
+  <meta name="description" content="Explore comprehensive guides, tutorials, and tips on using disposable temporary email addresses.">
   <link rel="canonical" href="https://tempmail.pdfgridbox.in/guide.html">
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +15,6 @@
     :root {
       --bg: #050505;
       --panel: #0b0b0b;
-      --panel2: #101010;
       --text: #f5f5f5;
       --muted: #a0a0a0;
       --gold: #f2dc78;
@@ -26,118 +24,65 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
+      margin: 0; background: var(--bg); color: var(--text);
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
     }
     a { color: inherit; text-decoration: none; }
-    
-    /* Header */
     .site-header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(5,5,5,.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #181818;
+      background: rgba(5,5,5,.94); backdrop-filter: blur(12px); border-bottom: 1px solid #181818;
     }
     .header-inner {
       max-width: 1100px; margin: auto; padding: 14px 20px;
       display: flex; align-items: center; justify-content: space-between; gap: 16px;
     }
-    .brand {
-      display: flex; align-items: center; gap: 12px;
-      font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #fff;
-    }
-    .brand-mark {
-      width: 38px; height: 38px; border: 2px solid var(--gold);
-      border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: var(--gold);
-    }
-    .brand-mark span { font-size: 15px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; text-transform: uppercase; color: #fff; }
+    .brand-mark { width: 38px; height: 38px; border: 2px solid var(--gold); border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: var(--gold); }
     .nav { display: flex; gap: 20px; font-size: 13px; color: #d5d5d5; }
     .nav a:hover { color: var(--gold); }
 
-    /* Layout */
     .page { max-width: 1000px; margin: auto; padding: 50px 20px 80px; }
     .hero { text-align: center; padding: 10px 0 35px; }
-    .eyebrow {
-      font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
-      color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px;
-    }
-    h1 { font-size: clamp(32px, 6vw, 50px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; letter-spacing: -.03em; color: #fff; }
-    .gold-line {
-      height: 3px; max-width: 480px; margin: 18px auto 26px;
-      background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c);
-    }
+    .eyebrow { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px; }
+    h1 { font-size: clamp(32px, 6vw, 50px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; color: #fff; }
+    .gold-line { height: 3px; max-width: 480px; margin: 18px auto 26px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
     .hero p { color: var(--muted); font-size: 16px; max-width: 620px; margin: auto; }
 
-    /* Search Bar */
-    .search-box {
-      max-width: 540px; margin: 0 auto 40px; position: relative;
-    }
+    .search-box { max-width: 540px; margin: 0 auto 40px; position: relative; }
     .search-input {
       width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
       border-radius: 12px; padding: 14px 18px 14px 44px; color: #fff;
       font-size: 15px; font-family: inherit; outline: none; transition: .2s;
     }
-    .search-input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(242, 220, 120, 0.15); }
-    .search-icon {
-      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-      color: #666; font-size: 16px;
-    }
+    .search-input:focus { border-color: var(--gold); }
+    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #666; font-size: 16px; }
 
-    /* Article Cards Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
-    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
     .card {
-      background: linear-gradient(180deg, #0d0d0d, #080808);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+      background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
+      border-radius: 16px; padding: 24px; display: flex; flex-direction: column;
+      justify-content: space-between; transition: transform .2s, border-color .2s;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #443722;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    }
+    .card:hover { transform: translateY(-4px); border-color: #443722; }
     .tag {
-      font-size: 10px; text-transform: uppercase; letter-spacing: .12em;
-      font-weight: 800; color: var(--gold); background: #18140a;
-      border: 1px solid #3d3118; padding: 4px 10px; border-radius: 6px;
+      font-size: 10px; text-transform: uppercase; font-weight: 800; color: var(--gold);
+      background: #18140a; border: 1px solid #3d3118; padding: 4px 10px; border-radius: 6px;
       display: inline-block; margin-bottom: 14px;
     }
-    .card h2 {
-      font-size: 18px; line-height: 1.4; margin: 0 0 10px;
-      font-weight: 700; color: #fff;
-    }
+    .card h2 { font-size: 18px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; }
     .card:hover h2 { color: var(--gold); }
-    .card p {
-      font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 18px;
-    }
-    .card-footer {
-      display: flex; align-items: center; justify-content: space-between;
-      border-top: 1px solid #161616; padding-top: 14px; margin-top: auto;
-      font-size: 12px; color: #777;
-    }
-    .read-more {
-      font-weight: 700; color: var(--gold); font-size: 12px;
-      display: inline-flex; align-items: center; gap: 4px;
-    }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 18px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 14px; margin-top: auto; font-size: 12px; color: #777; }
+    .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
 
-    /* Footer */
+    .loading-state { text-align: center; padding: 60px 20px; color: #777; font-size: 15px; }
+
     .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
     .footer-inner { max-width: 1000px; margin: auto; }
-    .footer-title { text-align: center; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; font-size: 16px; color: #fff; }
+    .footer-title { text-align: center; font-weight: 900; text-transform: uppercase; font-size: 16px; color: #fff; }
     .footer-line { height: 3px; max-width: 510px; margin: 16px auto 25px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
-    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; color: #cfcfcf; font-size: 14px; align-items: center; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; color: #cfcfcf; font-size: 14px; }
     .footer-links a:hover { color: var(--gold); }
     .social { display: flex; justify-content: center; gap: 14px; margin: 22px 0; }
     .social a { width: 42px; height: 42px; border: 1px solid #333; border-radius: 50%; display: grid; place-items: center; font-weight: 900; color: #fff; }
@@ -154,7 +99,6 @@
 </head>
 <body>
 
-  <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
@@ -170,7 +114,6 @@
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="page">
     <section class="hero">
       <span class="eyebrow">Knowledge Base & Guides</span>
@@ -179,58 +122,16 @@
       <p>Explore step-by-step tutorials, safety tips, and guides on using temporary disposable email addresses for OTP verification.</p>
     </section>
 
-    <!-- Search Input -->
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="text" id="articleSearch" class="search-input" placeholder="Search guides (e.g. OTP, verification, Discord)..." onkeyup="filterArticles()">
+      <input type="text" id="articleSearch" class="search-input" placeholder="Search guides..." onkeyup="filterArticles()">
     </div>
 
-    <!-- Articles Grid -->
     <div class="grid" id="articlesGrid">
-
-      <!-- Article 1 (Active Live Article) -->
-      <a href="guides/temporary-email-for-otp.html" class="card article-item">
-        <div>
-          <span class="tag">OTP & Verification</span>
-          <h2>Temporary Email for OTP: How to Receive Verification Codes Safely</h2>
-          <p>Learn how to safely use disposable email for receiving short-term OTPs and verification messages without risking primary inbox privacy.</p>
-        </div>
-        <div class="card-footer">
-          <span>5 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- Article 2 (Slot) -->
-      <a href="guides/temporary-email-for-verification.html" class="card article-item">
-        <div>
-          <span class="tag">Security</span>
-          <h2>How Does Temporary Email Protect Your Privacy Online?</h2>
-          <p>Understand how disposable email services prevent data leaks, eliminate marketing spam, and protect your primary mailbox.</p>
-        </div>
-        <div class="card-footer">
-          <span>4 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- Article 3 (Slot) -->
-      <a href="guides/how-does-temporary-email-work.html" class="card article-item">
-        <div>
-          <span class="tag">Architecture</span>
-          <h2>How Does Serverless Temporary Email Work Behind the Scenes?</h2>
-          <p>A complete technical breakdown of serverless mail routing, MX records, and real-time database delivery with zero persistence.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
+      <div class="loading-state" id="loadingText">Scanning articles from guides folder...</div>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-title">Quick Links</div>
@@ -271,6 +172,62 @@
   </footer>
 
   <script>
+    // GitHub Repo Configuration
+    const GITHUB_USER = "vvanrajsinh-vaghela"; // Aapka GitHub Username
+    const GITHUB_REPO = "tempmail"; // Aapka Repository Name (agar alag hai toh change karein)
+
+    function formatTitle(slug) {
+      return slug.replace(".html", "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    }
+
+    async function autoLoadArticles() {
+      const grid = document.getElementById('articlesGrid');
+      try {
+        const response = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides`);
+        if (!response.ok) throw new Error("Could not fetch guides");
+        const files = await response.json();
+        
+        const htmlFiles = files.filter(f => f.name.endsWith('.html'));
+
+        if(htmlFiles.length === 0) {
+          grid.innerHTML = `<div class="loading-state">No guides found in /guides/ folder.</div>`;
+          return;
+        }
+
+        grid.innerHTML = htmlFiles.map(file => {
+          const title = formatTitle(file.name);
+          return `
+            <a href="guides/${file.name}" class="card article-item">
+              <div>
+                <span class="tag">Guide</span>
+                <h2>${title}</h2>
+                <p>Read full tutorial and step-by-step instructions on ${title.toLowerCase()}.</p>
+              </div>
+              <div class="card-footer">
+                <span>5 min read</span>
+                <span class="read-more">Read Guide →</span>
+              </div>
+            </a>
+          `;
+        }).join('');
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = `
+          <a href="guides/temporary-email-for-otp.html" class="card article-item">
+            <div>
+              <span class="tag">OTP & Verification</span>
+              <h2>Temporary Email for OTP: How to Receive Verification Codes Safely</h2>
+              <p>Learn how to safely use disposable email for receiving short-term OTPs.</p>
+            </div>
+            <div class="card-footer">
+              <span>5 min read</span>
+              <span class="read-more">Read Guide →</span>
+            </div>
+          </a>
+        `;
+      }
+    }
+
     function filterArticles() {
       const input = document.getElementById('articleSearch').value.toLowerCase();
       const articles = document.querySelectorAll('.article-item');
@@ -279,6 +236,8 @@
         article.style.display = text.includes(input) ? "flex" : "none";
       });
     }
+
+    autoLoadArticles();
   </script>
 </body>
 </html>
