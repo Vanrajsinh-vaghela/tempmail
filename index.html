@@ -64,7 +64,7 @@ p,li{color:#c8c8c8;line-height:1.75}
 .copyright{text-align:center;color:#777;font-size:12px;margin-top:28px}
 @media(max-width:700px){
   .header-inner{padding:12px 14px}
-  .nav{display:flex;gap:12px;font-size:12px}
+  .nav{display:none}
   .page{padding:38px 16px 60px}
   .grid{grid-template-columns:1fr}
 }
@@ -105,10 +105,9 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
       <span>TempMail Box</span>
     </a>
     <nav class="nav">
-      <a href="index.html">Inbox</a>
-      <a href="#guide">Guide</a>
-      <a href="#faq">FAQ</a>
+      <a href="index.html">Temp Mail</a>
       <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
@@ -173,7 +172,7 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
     </div>
   </section>
 
-  <section class="faq" id="faq">
+  <section class="faq">
     <h2>About Temporary Email</h2>
     <div class="card">
       <h3>What is a temporary email?</h3>
@@ -196,7 +195,6 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
     <div class="footer-title">Quick Links</div>
     <div class="footer-line"></div>
     <div class="footer-links">
-      <a href="#guide">User Guide</a>
       <a href="contact.html">Contact Us</a>
       <a href="terms.html">Terms of Use</a>
       <a href="privacy-policy.html">Privacy Policy</a>
@@ -208,6 +206,7 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
     <div class="footer-title" style="margin-top:42px">Related Sites</div>
     <div class="footer-line"></div>
     <div class="footer-links">
+      <a href="#guide">User Guide</a>
       <a href="https://pdfgridbox.in" target="_blank" rel="noopener">PDFGridBox.in</a>
       <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener">BestTools</a>
       <a href="https://gujaratfastalert.in" target="_blank" rel="noopener">GujaratFastAlert.in</a>
@@ -309,4 +308,5 @@ setInterval(()=>{
   document.getElementById("timer").textContent=`Inbox refresh in ${countdown}s`;
 },1000);
 </script>
-</body></html>
+</body>
+</html>
