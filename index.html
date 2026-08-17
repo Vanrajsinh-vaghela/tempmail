@@ -51,6 +51,7 @@ p,li{color:#c8c8c8;line-height:1.75}
 .button.secondary{background:transparent;color:var(--text);border-color:#444}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .grid .card{margin:0}
+.step-number{width:32px;height:32px;border-radius:8px;background:#181818;border:1px solid var(--gold);color:var(--gold);display:grid;place-items:center;font-weight:900;font-size:14px;margin-bottom:14px}
 .site-footer{border-top:1px solid #1d1d1d;background:#030303;padding:55px 20px 30px}
 .footer-inner{max-width:1000px;margin:auto}
 .footer-title{text-align:center;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:17px}
@@ -63,7 +64,7 @@ p,li{color:#c8c8c8;line-height:1.75}
 .copyright{text-align:center;color:#777;font-size:12px;margin-top:28px}
 @media(max-width:700px){
   .header-inner{padding:12px 14px}
-  .nav{display:none}
+  .nav{display:flex;gap:12px;font-size:12px}
   .page{padding:38px 16px 60px}
   .grid{grid-template-columns:1fr}
 }
@@ -104,9 +105,10 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
       <span>TempMail Box</span>
     </a>
     <nav class="nav">
-      <a href="index.html">Temp Mail</a>
+      <a href="index.html">Inbox</a>
+      <a href="#guide">Guide</a>
+      <a href="#faq">FAQ</a>
       <a href="privacy-policy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
       <a href="contact.html">Contact</a>
     </nav>
   </div>
@@ -140,7 +142,38 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
     </div>
   </section>
 
-  <section class="faq">
+  <!-- Step-by-Step Guide Section -->
+  <section id="guide" style="margin-top:45px">
+    <h2>How It Works (User Guide)</h2>
+    <div class="gold-line" style="margin:14px 0 24px 0"></div>
+    
+    <div class="grid">
+      <div class="card">
+        <div class="step-number">1</div>
+        <h3 style="color:var(--gold);margin:0 0 8px;font-size:16px">Copy Email</h3>
+        <p style="font-size:13px">Click the <strong>Copy</strong> button above to instantly copy your unique temporary address to your clipboard.</p>
+      </div>
+
+      <div class="card">
+        <div class="step-number">2</div>
+        <h3 style="color:var(--gold);margin:0 0 8px;font-size:16px">Paste on Sites</h3>
+        <p style="font-size:13px">Paste it on any app, trial service, or website requiring account registration and email verification.</p>
+      </div>
+
+      <div class="card">
+        <div class="step-number">3</div>
+        <h3 style="color:var(--gold);margin:0 0 8px;font-size:16px">Receive & Copy OTP</h3>
+        <p style="font-size:13px">Incoming OTPs and verification links will automatically appear in your inbox within 3–5 seconds.</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;background:#0d0d0d;border-left:3px solid var(--gold)">
+      <h3 style="margin:0 0 6px;font-size:15px;color:var(--gold)">Pro-Tip for Fast Verification</h3>
+      <p style="font-size:12px;margin:0">Keep this browser tab open while registering on other apps. The system refreshes automatically every 5 seconds so you never miss an incoming OTP.</p>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
     <h2>About Temporary Email</h2>
     <div class="card">
       <h3>What is a temporary email?</h3>
@@ -163,6 +196,7 @@ input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;bord
     <div class="footer-title">Quick Links</div>
     <div class="footer-line"></div>
     <div class="footer-links">
+      <a href="#guide">User Guide</a>
       <a href="contact.html">Contact Us</a>
       <a href="terms.html">Terms of Use</a>
       <a href="privacy-policy.html">Privacy Policy</a>
