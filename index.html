@@ -1,270 +1,278 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Temp Mail - Instant Disposable Email & OTP Receiver</title>
-  <meta name="description" content="Get a 100% free, fast, and anonymous temporary email address. Receive verification codes and OTPs instantly without spam.">
-  <meta name="keywords" content="temp mail, disposable email, 10 minute mail, fake email generator, receive otp online, temporary inbox">
-  
-  <!-- Open Graph / SEO -->
-  <meta property="og:title" content="Instant Free Temp Mail - Protect Your Privacy">
-  <meta property="og:description" content="Generate disposable email addresses to bypass sign-ups and spam.">
-  <meta property="og:type" content="website">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Temp Mail — Instant Disposable Email & OTP Receiver</title>
+<meta name="description" content="Free temporary email inbox for receiving verification emails and OTPs without using your primary email address.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505;
+  --panel:#0b0b0b;
+  --panel2:#101010;
+  --text:#f5f5f5;
+  --muted:#b9b9b9;
+  --gold:#f2dc78;
+  --gold2:#b77b45;
+  --line:#292929;
+  --blue:#1688ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+a{color:inherit;text-decoration:none}
+a:hover{opacity:.85}
+.site-header{
+  position:sticky;top:0;z-index:50;background:rgba(5,5,5,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid #181818;
+}
+.header-inner{max-width:1100px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.brand-mark{width:38px;height:38px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-weight:900;color:var(--gold)}
+.brand-mark span{font-size:15px}
+.nav{display:flex;gap:20px;font-size:13px;color:#d5d5d5}
+.nav a:hover{color:var(--gold)}
+.page{max-width:900px;margin:auto;padding:55px 20px 80px}
+.hero{text-align:center;padding:20px 0 35px}
+.eyebrow{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1{font-size:clamp(34px,7vw,58px);line-height:1.02;margin:14px 0}
+h2{font-size:25px;margin-top:38px}
+h3{font-size:18px;margin-top:28px}
+p,li{color:#c8c8c8;line-height:1.75}
+.card{background:linear-gradient(180deg,#0d0d0d,#080808);border:1px solid var(--line);border-radius:16px;padding:24px;margin:16px 0}
+.gold-line{height:3px;max-width:520px;margin:18px auto 30px;background:linear-gradient(90deg,var(--gold),var(--gold2),#33251c)}
+.button{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--gold);color:#0a0a0a;background:var(--gold);padding:12px 18px;border-radius:9px;font-weight:800}
+.button.secondary{background:transparent;color:var(--text);border-color:#444}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid .card{margin:0}
+.site-footer{border-top:1px solid #1d1d1d;background:#030303;padding:55px 20px 30px}
+.footer-inner{max-width:1000px;margin:auto}
+.footer-title{text-align:center;font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:17px}
+.footer-line{height:3px;max-width:510px;margin:16px auto 25px;background:linear-gradient(90deg,var(--gold),var(--gold2),#33251c)}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 26px;color:#cfcfcf;font-size:14px}
+.footer-links a:hover{color:var(--gold)}
+.social{display:flex;justify-content:center;gap:14px;margin:22px 0}
+.social a{width:42px;height:42px;border:1px solid #333;border-radius:50%;display:grid;place-items:center;font-weight:900}
+.social a:hover{border-color:var(--gold);color:var(--gold)}
+.copyright{text-align:center;color:#777;font-size:12px;margin-top:28px}
+@media(max-width:700px){
+  .header-inner{padding:12px 14px}
+  .nav{display:none}
+  .page{padding:38px 16px 60px}
+  .grid{grid-template-columns:1fr}
+}
 
-  <!-- Tailwind CSS & Lucide Icons -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <style>
-    @keyframes pulse-slow {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.02); }
-    }
-    .pulse-glow { animation: pulse-slow 3s infinite; }
-  </style>
+.hero h1{font-weight:900;letter-spacing:-.04em}
+.mailbox{background:linear-gradient(180deg,#111,#080808);border:1px solid #2c2c2c;border-radius:18px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:#9c9c9c;margin-bottom:9px;font-weight:800}
+.mail-row{display:flex;gap:10px}
+input{width:100%;background:#050505;color:var(--gold);border:1px solid #333;border-radius:10px;padding:14px;font:600 16px ui-monospace,SFMono-Regular,Menlo,monospace}
+.btn{border:1px solid #444;background:#171717;color:#fff;border-radius:10px;padding:0 17px;font-weight:800;cursor:pointer;min-height:48px}
+.btn.primary{background:var(--gold);color:#090909;border-color:var(--gold)}
+.btn:hover{filter:brightness(1.08)}
+.status{display:flex;align-items:center;gap:8px;color:#bcbcbc;font-size:12px;margin-top:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#58d68d;box-shadow:0 0 12px #58d68d}
+.inbox{margin-top:20px;background:#0b0b0b;border:1px solid #242424;border-radius:18px;padding:18px}
+.inbox-head{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #222;padding-bottom:14px}
+.badge{border:1px solid #333;border-radius:999px;padding:5px 9px;font-size:11px;color:#bbb}
+.mail{border:1px solid #252525;background:#050505;border-radius:12px;padding:14px;margin-top:12px}
+.mail-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#999;font-size:11px}
+.sender{color:var(--gold);font-weight:800}
+.subject{font-weight:800;margin:8px 0}
+.body{color:#aaa;font-size:12px;line-height:1.65;white-space:pre-wrap;max-height:160px;overflow:auto}
+.otp{margin-top:10px;padding:10px;border:1px solid #315d3e;background:#0b1a0f;border-radius:9px;display:flex;justify-content:space-between;align-items:center;gap:10px;color:#9de0ae;font-size:12px}
+.otp strong{font-size:18px;color:#d5ffe0}
+.empty{text-align:center;padding:55px 12px;color:#888}
+.faq{margin-top:45px}
+.faq .card h3{color:var(--gold);margin:0 0 7px;font-size:15px}
+.small-note{font-size:11px;color:#777;line-height:1.6;margin-top:14px}
+@media(max-width:650px){.mail-row{flex-direction:column}.btn{min-height:46px}.mailbox{padding:14px}}
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+<body>
 
-  <!-- Header -->
-  <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="bg-indigo-600 p-2 rounded-lg text-white">
-          <i data-lucide="mail" class="w-5 h-5"></i>
-        </div>
-        <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">TempMail Box</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Live Server
-        </span>
-      </div>
-    </div>
-  </header>
-
-  <!-- Top Ad Space -->
-  <div class="max-w-4xl mx-auto w-full px-4 mt-4">
-    <div class="w-full h-16 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center text-xs text-slate-500 tracking-wider">
-      <!-- PASTE YOUR 728x90 AD CODE HERE -->
-      <span>ADVERTISEMENT AREA</span>
-    </div>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-mark"><span>TM</span></div>
+      <span>TempMail Box</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Temp Mail</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <!-- Main Generator Section -->
-  <main class="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
-    <div class="text-center mb-8">
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Disposable Temporary Email</h1>
-      <p class="text-slate-400 text-sm sm:text-base">Instant inbox to receive OTPs, verification links, and bypass registrations.</p>
+<main class="page">
+  <section class="hero">
+    <div class="eyebrow">Private • Fast • Disposable</div>
+    <h1>Free Temporary Email</h1>
+    <div class="gold-line"></div>
+    <p>Generate a disposable inbox and receive verification emails or OTPs without exposing your primary email address.</p>
+  </section>
+
+  <section class="mailbox">
+    <div class="label">Your temporary email address</div>
+    <div class="mail-row">
+      <input id="emailInput" readonly value="Generating…">
+      <button class="btn primary" id="copyBtn" onclick="copyEmail()">Copy</button>
+      <button class="btn" onclick="generateNewEmail()">New</button>
+    </div>
+    <div class="status"><span class="dot"></span><span id="timer">Checking inbox…</span></div>
+  </section>
+
+  <section class="inbox">
+    <div class="inbox-head">
+      <strong>Incoming Messages</strong>
+      <span class="badge" id="mailCount">0 Mails</span>
+    </div>
+    <div id="inboxContainer">
+      <div class="empty">Waiting for incoming emails…<br><span style="font-size:11px">Messages will appear here when the worker receives them.</span></div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <h2>About Temporary Email</h2>
+    <div class="card">
+      <h3>What is a temporary email?</h3>
+      <p>A temporary email is a disposable address used for short-lived communication, such as verification messages, while keeping your primary inbox separate.</p>
+    </div>
+    <div class="card">
+      <h3>Is it free?</h3>
+      <p>Yes. The website interface is free to use. Availability and retention depend on the mail infrastructure behind the service.</p>
+    </div>
+    <div class="card">
+      <h3>Should I use it for important accounts?</h3>
+      <p>No. Disposable addresses can expire and should not be used for banking, account recovery, identity verification, or anything you need to retain permanently.</p>
+    </div>
+    <p class="small-note">Important: do not promise “100% anonymous”, “100% secure”, “unlimited”, or a fixed deletion period unless your backend actually guarantees those claims.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-title">Quick Links</div>
+    <div class="footer-line"></div>
+    <div class="footer-links">
+      <a href="contact.html">Contact Us</a>
+      <a href="terms.html">Terms of Use</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="california-privacy.html">California Privacy Statement</a>
+      <a href="cookie-notice.html">Cookie Notice</a>
+      <a href="cookie-settings.html">Cookie Settings</a>
     </div>
 
-    <!-- Email Box Component -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-2xl pulse-glow mb-8">
-      <div class="text-xs uppercase font-semibold text-slate-400 mb-2 flex justify-between">
-        <span>Your Temporary Email Address</span>
-        <span id="refreshTimerText" class="text-indigo-400">Refreshing in 4s...</span>
-      </div>
-
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-        <div class="relative flex-1">
-          <input type="text" id="emailInput" readonly value="Generating..." 
-            class="w-full bg-slate-950 border border-slate-800 px-4 py-3.5 rounded-xl font-mono text-base sm:text-lg text-indigo-300 font-semibold focus:outline-none focus:border-indigo-500 select-all">
-        </div>
-        
-        <button onclick="copyEmail()" id="copyBtn" class="bg-indigo-600 hover:bg-indigo-500 active:scale-95 transition px-6 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/20">
-          <i data-lucide="copy" class="w-4 h-4"></i> Copy
-        </button>
-
-        <button onclick="generateNewEmail()" class="bg-slate-800 hover:bg-slate-700 active:scale-95 transition px-4 py-3.5 rounded-xl font-semibold flex items-center justify-center gap-2 text-slate-300 border border-slate-700">
-          <i data-lucide="refresh-cw" class="w-4 h-4"></i> New
-        </button>
-      </div>
+    <div class="footer-title" style="margin-top:42px">Related Sites</div>
+    <div class="footer-line"></div>
+    <div class="footer-links">
+      <a href="https://pdfgridbox.in" target="_blank" rel="noopener">PDFGridBox.in</a>
+      <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener">BestTools</a>
+      <a href="https://gujaratfastalert.in" target="_blank" rel="noopener">GujaratFastAlert.in</a>
     </div>
 
-    <!-- Waiting Engagement Widget (Stars Rating & Poll while waiting) -->
-    <div id="ratingWidget" class="bg-gradient-to-r from-indigo-950/40 via-slate-900 to-slate-900 border border-indigo-900/40 rounded-xl p-4 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="text-center sm:text-left">
-        <p class="font-medium text-sm text-slate-200">Waiting for OTP? Rate your experience!</p>
-        <p class="text-xs text-slate-400">Help us keep our disposable email free & fast.</p>
-      </div>
-      <div class="flex items-center gap-1.5" id="starContainer">
-        <button onclick="submitRating(1)" class="p-1 text-slate-500 hover:text-amber-400 transition text-lg">★</button>
-        <button onclick="submitRating(2)" class="p-1 text-slate-500 hover:text-amber-400 transition text-lg">★</button>
-        <button onclick="submitRating(3)" class="p-1 text-slate-500 hover:text-amber-400 transition text-lg">★</button>
-        <button onclick="submitRating(4)" class="p-1 text-slate-500 hover:text-amber-400 transition text-lg">★</button>
-        <button onclick="submitRating(5)" class="p-1 text-slate-500 hover:text-amber-400 transition text-lg">★</button>
-      </div>
-      <div id="ratingFeedback" class="hidden text-xs font-semibold text-emerald-400">Thanks for supporting us! ❤️</div>
+    <div class="footer-title" style="margin-top:42px">Follow / Connect</div>
+    <div class="footer-line"></div>
+    <div class="social">
+      <a href="mailto:pdfgridbox@gmail.com" aria-label="Email">✉</a>
+      <a href="https://pdfgridbox.in" target="_blank" rel="noopener" aria-label="Website">P</a>
+      <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener" aria-label="BestTools">B</a>
+      <a href="https://gujaratfastalert.in" target="_blank" rel="noopener" aria-label="GujaratFastAlert">G</a>
     </div>
 
-    <!-- Inbox List Section -->
-    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6">
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-        <h2 class="text-lg font-bold flex items-center gap-2">
-          <i data-lucide="inbox" class="w-5 h-5 text-indigo-400"></i> Incoming Messages
-        </h2>
-        <span id="mailCountBadge" class="px-2.5 py-0.5 text-xs rounded-full bg-slate-800 text-slate-300 font-mono">0 Mails</span>
-      </div>
+    <div class="copyright">
+  © 2026 TempMail Box. All Rights Reserved.<br>
+  <span style="display:inline-block;margin-top:8px;color:#a8a8a8;">
+    Managed and Published by <strong style="color:#f2dc78;">Vanrajsinh Vaghela</strong>
+  </span>
+</div>
+  </div>
+</footer>
 
-      <div id="inboxContainer" class="space-y-3">
-        <!-- Empty State -->
-        <div id="emptyState" class="py-12 flex flex-col items-center justify-center text-center">
-          <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 mb-3 animate-pulse">
-            <i data-lucide="clock" class="w-6 h-6"></i>
-          </div>
-          <p class="font-medium text-slate-300">Waiting for incoming emails...</p>
-          <p class="text-xs text-slate-500 mt-1 max-w-xs">Use the email above to register on any platform. Received messages appear here instantly.</p>
-        </div>
-      </div>
-    </div>
+<script>
+const DOMAIN="tempmail.pdfgridbox.in";
+const WORKER_URL="https://tempmail-worker.shreeramstudiokatwad.workers.dev";
+let currentEmail="", lastMailCount=0, countdown=5;
 
-    <!-- SEO FAQ Section -->
-    <div class="mt-12 space-y-4">
-      <h3 class="text-xl font-bold text-slate-200">Frequently Asked Questions</h3>
-      <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
-        <h4 class="font-semibold text-indigo-400 text-sm mb-1">What is a Temporary Email?</h4>
-        <p class="text-xs text-slate-400">A temporary disposable email allows you to receive emails and verification OTPs at a temporary address that automatically expires, protecting your real inbox from spam.</p>
-      </div>
-      <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-4">
-        <h4 class="font-semibold text-indigo-400 text-sm mb-1">Is this service free?</h4>
-        <p class="text-xs text-slate-400">Yes, it is 100% free with unlimited mail generation and instant OTP delivery.</p>
-      </div>
-    </div>
-  </main>
+function escapeHTML(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+function extractOTP(text){
+  if(!text) return null;
+  const m=String(text).match(/\b\d{4,8}\b/);
+  return m ? m[0] : null;
+}
+function generateNewEmail(){
+  const randomStr=Math.random().toString(36).slice(2,9);
+  currentEmail=`${randomStr}@${DOMAIN}`;
+  document.getElementById("emailInput").value=currentEmail;
+  lastMailCount=0;
+  fetchInbox();
+}
+async function copyEmail(){
+  try{
+    await navigator.clipboard.writeText(currentEmail);
+    const b=document.getElementById("copyBtn");
+    b.textContent="Copied!";
+    setTimeout(()=>b.textContent="Copy",1500);
+  }catch(e){}
+}
+async function copyOTP(otp){
+  try{await navigator.clipboard.writeText(otp)}catch(e){}
+}
+async function fetchInbox(){
+  if(!currentEmail) return;
+  try{
+    const res=await fetch(`${WORKER_URL}/api/messages?email=${encodeURIComponent(currentEmail)}`,{cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const messages=await res.json();
+    const list=Array.isArray(messages)?messages:[];
+    document.getElementById("mailCount").textContent=`${list.length} Mails`;
 
-  <!-- Footer -->
-  <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-    <p>© 2026 TempMail Box • Powered by Cloudflare D1 Serverless Architecture</p>
-  </footer>
-
-  <script>
-    const DOMAIN = "tempmail.pdfgridbox.in";
-    const WORKER_URL = "https://tempmail-worker.shreeramstudiokatwad.workers.dev"; // Aapka worker URL
-    let currentEmail = "";
-    let lastMailCount = 0;
-    let countdown = 4;
-
-    function playAlertSound() {
-      try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.type = "sine";
-        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-        osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.35);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.35);
-      } catch(e){}
-    }
-
-    function extractOTP(text) {
-      if(!text) return null;
-      const match = text.match(/\b\d{4,8}\b/);
-      return match ? match[0] : null;
-    }
-
-    function generateNewEmail() {
-      const randomStr = Math.random().toString(36).substring(2, 9);
-      currentEmail = `${randomStr}@${DOMAIN}`;
-      document.getElementById("emailInput").value = currentEmail;
-      lastMailCount = 0;
-      fetchInbox();
-    }
-
-    function copyEmail() {
-      const email = document.getElementById("emailInput").value;
-      navigator.clipboard.writeText(email);
-      const btn = document.getElementById("copyBtn");
-      btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i> Copied!`;
-      btn.classList.add("bg-emerald-600");
-      lucide.createIcons();
-      setTimeout(() => {
-        btn.innerHTML = `<i data-lucide="copy" class="w-4 h-4"></i> Copy`;
-        btn.classList.remove("bg-emerald-600");
-        lucide.createIcons();
-      }, 2000);
-    }
-
-    function copyOTP(otp) {
-      navigator.clipboard.writeText(otp);
-      alert("OTP Copied: " + otp);
-    }
-
-    function submitRating(stars) {
-      document.getElementById("starContainer").classList.add("hidden");
-      document.getElementById("ratingFeedback").classList.remove("hidden");
-      localStorage.setItem("tempmail_rated", stars);
-    }
-
-    async function fetchInbox() {
-      if (!currentEmail) return;
-      try {
-        const res = await fetch(`${WORKER_URL}/api/messages?email=${encodeURIComponent(currentEmail)}`);
-        const messages = await res.json();
-        
-        const container = document.getElementById("inboxContainer");
-        const countBadge = document.getElementById("mailCountBadge");
-        
-        countBadge.innerText = `${messages.length} Mails`;
-
-        if (messages.length > lastMailCount && lastMailCount !== 0) {
-          playAlertSound();
-        }
-        lastMailCount = messages.length;
-
-        if (messages.length === 0) {
-          container.innerHTML = `
-            <div id="emptyState" class="py-12 flex flex-col items-center justify-center text-center">
-              <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 mb-3 animate-pulse">
-                <i data-lucide="clock" class="w-6 h-6"></i>
-              </div>
-              <p class="font-medium text-slate-300">Waiting for incoming emails...</p>
-              <p class="text-xs text-slate-500 mt-1 max-w-xs">Use the email above to sign up. Received messages appear here instantly.</p>
-            </div>`;
-        } else {
-          container.innerHTML = messages.map(m => {
-            const otp = extractOTP(m.body || m.subject);
-            return `
-              <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl hover:border-slate-700 transition space-y-2">
-                <div class="flex items-center justify-between flex-wrap gap-2">
-                  <span class="text-xs font-semibold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">${m.from || "Unknown Sender"}</span>
-                  <span class="text-xs text-slate-500">${m.date || ""}</span>
-                </div>
-                <div class="font-bold text-slate-100 text-sm sm:text-base">${m.subject || "(No Subject)"}</div>
-                ${otp ? `
-                  <div class="bg-emerald-950/40 border border-emerald-800/50 p-2.5 rounded-lg flex items-center justify-between">
-                    <span class="text-xs text-emerald-400 font-semibold">Detected Code: <strong class="text-base text-emerald-200">${otp}</strong></span>
-                    <button onclick="copyOTP('${otp}')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-md transition">Copy OTP</button>
-                  </div>
-                ` : ''}
-                <div class="text-xs text-slate-400 leading-relaxed max-h-36 overflow-y-auto whitespace-pre-wrap">${m.body || "(No Body)"}</div>
-              </div>
-            `;
-          }).join("");
-        }
-        lucide.createIcons();
-      } catch(err) {
-        console.error("Inbox fetch error:", err);
+    if(list.length>lastMailCount && lastMailCount!==0){
+      if("Notification" in window && Notification.permission==="granted"){
+        new Notification("New temporary email",{body:"A new message arrived in your inbox."});
       }
     }
+    lastMailCount=list.length;
 
-    // Initialize
-    generateNewEmail();
-    lucide.createIcons();
-
-    // Auto-polling every 4 seconds
-    setInterval(() => {
-      countdown--;
-      if (countdown <= 0) {
-        countdown = 4;
-        fetchInbox();
-      }
-      document.getElementById("refreshTimerText").innerText = `Refreshing in ${countdown}s...`;
-    }, 1000);
-  </script>
-</body>
-</html>
+    const c=document.getElementById("inboxContainer");
+    if(!list.length){
+      c.innerHTML=`<div class="empty">Waiting for incoming emails…<br><span style="font-size:11px">Messages will appear here when the worker receives them.</span></div>`;
+      return;
+    }
+    c.innerHTML=list.map(m=>{
+      const from=escapeHTML(m.from||"Unknown sender");
+      const subject=escapeHTML(m.subject||"(No subject)");
+      const date=escapeHTML(m.date||"");
+      const body=escapeHTML(m.body||"(No body)");
+      const otp=extractOTP(m.body||m.subject);
+      return `<article class="mail">
+        <div class="mail-top"><span class="sender">${from}</span><span>${date}</span></div>
+        <div class="subject">${subject}</div>
+        ${otp?`<div class="otp"><span>Detected code: <strong>${escapeHTML(otp)}</strong></span><button class="btn" style="min-height:34px;padding:0 10px" onclick="copyOTP('${escapeHTML(otp)}')">Copy OTP</button></div>`:""}
+        <div class="body">${body}</div>
+      </article>`;
+    }).join("");
+  }catch(err){
+    console.error(err);
+  }
+}
+generateNewEmail();
+setInterval(()=>{
+  countdown--;
+  if(countdown<=0){countdown=5;fetchInbox();}
+  document.getElementById("timer").textContent=`Inbox refresh in ${countdown}s`;
+},1000);
+</script>
+</body></html>
