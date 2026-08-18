@@ -19,13 +19,13 @@
 
   <meta name="keywords" content="how does temp mail work behind the scenes, how temporary email works, temp mail architecture, disposable email server, temporary email technology, SMTP temp mail, DNS MX temp mail">
 
-  <link rel="canonical" href="https://tempmail.pdfgridbox.in/guides/007-how-does-temp-mail-work-behind-the-scenes.html">
+  <link rel="canonical" href="https://tempmail.pdfgridbox.in/guides/005-how-does-temp-mail-work-behind-the-scenes.html">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:title" content="How Does Temp Mail Work Behind the Scenes? (Architecture Explained)">
   <meta property="og:description" content="Discover how temporary email systems receive, process, store, and deliver disposable emails in real time.">
-  <meta property="og:url" content="https://tempmail.pdfgridbox.in/guides/007-how-does-temp-mail-work-behind-the-scenes.html">
+  <meta property="og:url" content="https://tempmail.pdfgridbox.in/guides/005-how-does-temp-mail-work-behind-the-scenes.html">
   <meta property="og:site_name" content="TempMail PDFGridBox">
 
   <!-- Twitter -->
@@ -55,7 +55,7 @@
     },
     "mainEntityOfPage":{
       "@type":"WebPage",
-      "@id":"https://tempmail.pdfgridbox.in/guides/007-how-does-temp-mail-work-behind-the-scenes.html"
+      "@id":"https://tempmail.pdfgridbox.in/guides/005-how-does-temp-mail-work-behind-the-scenes.html"
     }
   }
   </script>
