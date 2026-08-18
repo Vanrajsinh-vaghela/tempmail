@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y486RK7RLC"></script>
   <script>
@@ -15,9 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>User Guides & Knowledge Base — TempMail Box</title>
-
-  <meta name="description" content="Browse all TempMail Box user guides, tutorials, privacy articles, security guides, technical explanations and temporary email resources.">
-
+  <meta name="description" content="Browse 260+ TempMail Box user guides, tutorials, privacy articles, security guides, and technical temporary email resources.">
   <link rel="canonical" href="https://tempmail.pdfgridbox.in/guide.html">
 
   <!-- Open Graph -->
@@ -39,65 +36,49 @@
 
   <style>
     :root {
-      --bg: #050505;
-      --panel: #0b0b0b;
-      --panel2: #101010;
-      --text: #f5f5f5;
-      --muted: #a0a0a0;
+      --bg: #060608;
+      --card-bg: #0e0e11;
+      --card-border: #1a1a20;
+      --card-hover-border: #f2dc78;
+      --text: #f5f5f7;
+      --muted: #9496a1;
       --gold: #f2dc78;
-      --gold2: #b77b45;
-      --line: #242424;
-      --blue: #1688ff;
+      --gold-dark: #b77b45;
+      --gold-glow: rgba(242, 220, 120, 0.12);
+      --line: #18181f;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      line-height: 1.7;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    a { color: inherit; text-decoration: none; }
 
     /* ================= HEADER ================= */
-
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(5,5,5,.94);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #181818;
+      background: rgba(6, 6, 8, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
     }
-
     .header-inner {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: auto;
       padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
     }
-
     .brand {
       display: flex;
       align-items: center;
@@ -106,1195 +87,600 @@
       letter-spacing: .06em;
       text-transform: uppercase;
       color: #fff;
+      font-size: 15px;
     }
-
     .brand-mark {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border: 2px solid var(--gold);
       border-radius: 50%;
       display: grid;
       place-items: center;
       font-weight: 900;
       color: var(--gold);
-      flex-shrink: 0;
+      font-size: 13px;
     }
-
-    .brand-mark span {
-      font-size: 15px;
-    }
-
     .nav {
       display: flex;
-      gap: 20px;
+      gap: 22px;
       font-size: 13px;
-      color: #d5d5d5;
+      font-weight: 500;
     }
+    .nav a { color: #a1a1aa; transition: color 0.2s; }
+    .nav a:hover, .nav a.active { color: var(--gold); }
 
-    .nav a {
-      color: #d5d5d5;
-    }
-
-    .nav a:hover {
-      color: var(--gold);
-    }
-
-    /* ================= PAGE ================= */
-
+    /* ================= PAGE HERO ================= */
     .page {
-      max-width: 1000px;
-      margin: auto;
-      padding: 42px 20px 80px;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+      flex: 1;
+      width: 100%;
     }
-
-    /* ================= HERO ================= */
-
     .hero {
       text-align: center;
-      padding: 10px 0 15px;
+      max-width: 760px;
+      margin: 0 auto 35px;
     }
-
     .eyebrow {
       font-size: 11px;
       letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--gold);
       font-weight: 800;
-      display: inline-block;
       margin-bottom: 10px;
+      display: inline-block;
     }
-
     h1 {
-      font-size: clamp(30px, 5.5vw, 48px);
-      line-height: 1.1;
-      margin: 10px 0 16px;
+      font-size: clamp(28px, 4.5vw, 42px);
       font-weight: 900;
-      color: #fff;
       letter-spacing: -.03em;
+      line-height: 1.15;
+      color: #fff;
     }
-
     .gold-line {
       height: 3px;
-      max-width: 480px;
-      margin: 18px auto 20px;
-      background:
-        linear-gradient(
-          90deg,
-          var(--gold),
-          var(--gold2),
-          #33251c
-        );
+      max-width: 240px;
+      margin: 14px auto 16px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), transparent);
     }
-
     .hero p {
       color: var(--muted);
-      font-size: 15px;
-      max-width: 680px;
-      margin: auto;
+      font-size: 14.5px;
     }
 
-    /* ================= STATS ================= */
-
-    .stats-row {
+    /* ================= CONTROLS (SEARCH & FILTERS) ================= */
+    .controls-wrapper {
+      max-width: 820px;
+      margin: 0 auto 35px;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0 28px;
+      flex-direction: column;
+      gap: 16px;
     }
-
-    .stats-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #111;
-      border: 1px solid #282828;
-      padding: 7px 15px;
-      border-radius: 30px;
-      font-size: 12px;
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    /* ================= SEARCH ================= */
-
     .search-box {
-      max-width: 600px;
-      margin: 0 auto 25px;
       position: relative;
+      width: 100%;
     }
-
     .search-input {
       width: 100%;
-      background: #0c0c0c;
-      border: 1px solid #2a2a2a;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 14px 18px 14px 45px;
+      padding: 14px 44px 14px 44px;
       color: #fff;
-      font-size: 14px;
+      font-size: 14.5px;
       font-family: inherit;
       outline: none;
-      transition: .2s;
+      transition: all 0.2s ease;
     }
-
     .search-input:focus {
       border-color: var(--gold);
-      box-shadow: 0 0 0 2px rgba(242,220,120,.06);
+      box-shadow: 0 0 0 3px var(--gold-glow);
     }
-
     .search-icon {
       position: absolute;
       left: 16px;
       top: 50%;
       transform: translateY(-50%);
-      color: #666;
       font-size: 15px;
-      pointer-events: none;
+      color: #71717a;
     }
-
-    .search-status {
-      text-align: center;
-      color: #666;
+    .clear-btn {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #202028;
+      border: none;
+      color: #a1a1aa;
       font-size: 12px;
-      margin-bottom: 25px;
-      min-height: 18px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: none;
+    }
+    .clear-btn:hover { color: #fff; background: #2e2e38; }
+
+    /* Category Filter Pills */
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+    .pill-btn {
+      background: #111116;
+      border: 1px solid var(--card-border);
+      color: #9496a1;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .pill-btn:hover {
+      color: #fff;
+      border-color: #33333f;
+    }
+    .pill-btn.active {
+      background: var(--gold);
+      color: #060608;
+      border-color: var(--gold);
+      font-weight: 700;
     }
 
-    /* ================= GRID ================= */
+    .status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12.5px;
+      color: #71717a;
+      padding: 0 4px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+    .status-count { color: var(--gold); font-weight: 700; }
 
+    /* ================= GUIDE GRID ================= */
     .grid {
       display: grid;
-      grid-template-columns:
-        repeat(auto-fill, minmax(290px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
     }
 
     .card {
-      background:
-        linear-gradient(
-          180deg,
-          #0d0d0d,
-          #080808
-        );
-
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 22px;
-
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
-      min-height: 245px;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
+      min-height: 200px;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
     }
-
     .card:hover {
-      transform: translateY(-4px);
-      border-color: #443722;
-      box-shadow: 0 12px 35px rgba(0,0,0,.25);
+      transform: translateY(-3px);
+      border-color: rgba(242, 220, 120, 0.4);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
     }
-
-    .card-top {
+    .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 13px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
-
     .card-num {
-      font-size: 12px;
+      font-size: 11px;
+      font-weight: 800;
       color: var(--gold);
-      font-weight: 900;
-      background: #161208;
-      border: 1px solid #3d3118;
+      background: rgba(242, 220, 120, 0.08);
+      border: 1px solid rgba(242, 220, 120, 0.25);
       padding: 3px 8px;
       border-radius: 6px;
+      letter-spacing: .05em;
     }
-
     .tag {
       font-size: 10px;
       text-transform: uppercase;
-      font-weight: 800;
-      color: #bbb;
-      background: #161616;
-      border: 1px solid #282828;
+      font-weight: 700;
+      color: #a1a1aa;
+      background: #141419;
+      border: 1px solid #22222c;
       padding: 3px 8px;
       border-radius: 6px;
-      white-space: nowrap;
+      letter-spacing: .03em;
     }
-
     .card h2 {
-      font-size: 17px;
+      font-size: 15.5px;
       line-height: 1.4;
-      margin: 0 0 10px;
       font-weight: 700;
-      color: #fff;
-      letter-spacing: -.01em;
+      color: #f1f1f5;
+      margin-bottom: 8px;
+      transition: color 0.2s;
     }
-
     .card:hover h2 {
       color: var(--gold);
     }
-
     .card p {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--muted);
-      line-height: 1.6;
-      margin: 0 0 18px;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
-
     .card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-
-      border-top: 1px solid #161616;
+      border-top: 1px solid var(--line);
       padding-top: 12px;
       margin-top: auto;
-
-      font-size: 12px;
-      color: #777;
+      font-size: 11.5px;
+      color: #63636e;
     }
-
-    .read-more {
-      font-weight: 700;
+    .read-link {
       color: var(--gold);
-      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    /* ================= LOADING / EMPTY ================= */
-
-    .loading-box,
-    .empty-box {
+    /* States */
+    .state-box {
       grid-column: 1 / -1;
       text-align: center;
-      color: #666;
-      padding: 55px 20px;
-      font-size: 14px;
-      border: 1px dashed #222;
-      border-radius: 14px;
-      background: #080808;
-    }
-
-    .error-box {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: #c9a98b;
-      padding: 35px 20px;
-      border: 1px solid #392719;
-      border-radius: 14px;
-      background: #100b07;
+      padding: 50px 20px;
+      border: 1px dashed var(--card-border);
+      border-radius: 12px;
+      color: var(--muted);
+      background: #09090c;
       font-size: 14px;
     }
 
     /* ================= FOOTER ================= */
-
     .site-footer {
-      border-top: 1px solid #1d1d1d;
-      background: #030303;
-      padding: 55px 20px 30px;
-      margin-top: 70px;
+      border-top: 1px solid var(--line);
+      background: #040405;
+      padding: 50px 20px 30px;
+      margin-top: auto;
     }
-
-    .footer-inner {
-      max-width: 1000px;
-      margin: auto;
-    }
-
+    .footer-inner { max-width: 1000px; margin: auto; }
     .footer-title {
       text-align: center;
-      font-weight: 900;
+      font-weight: 800;
       letter-spacing: .08em;
       text-transform: uppercase;
-      font-size: 16px;
+      font-size: 14px;
       color: #fff;
     }
-
     .footer-line {
-      height: 3px;
-      max-width: 510px;
-      margin: 16px auto 25px;
-      background:
-        linear-gradient(
-          90deg,
-          var(--gold),
-          var(--gold2),
-          #33251c
-        );
+      height: 2px;
+      max-width: 380px;
+      margin: 14px auto 20px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-dark), transparent);
     }
-
     .footer-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px 26px;
-      color: #cfcfcf;
-      font-size: 14px;
+      gap: 12px 24px;
+      color: #a1a1aa;
+      font-size: 13px;
     }
-
-    .footer-links a {
-      color: #cfcfcf;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold);
-    }
-
+    .footer-links a:hover { color: var(--gold); }
     .copyright {
       text-align: center;
-      color: #777;
+      color: #52525b;
       font-size: 12px;
-      margin-top: 28px;
+      margin-top: 25px;
     }
 
-    /* ================= MOBILE ================= */
-
-    @media (max-width: 700px) {
-
-      .header-inner {
-        padding: 12px 14px;
-      }
-
-      .nav {
-        display: none;
-      }
-
-      .page {
-        padding: 30px 16px 60px;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card {
-        min-height: 220px;
-      }
-
-      .card h2 {
-        font-size: 16px;
-      }
+    @media (max-width: 768px) {
+      .header-inner { padding: 12px 16px; }
+      .nav { display: none; }
+      .page { padding: 25px 14px 50px; }
+      .grid { grid-template-columns: 1fr; }
+      .controls-wrapper { gap: 12px; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-
+  <!-- Header -->
   <header class="site-header">
     <div class="header-inner">
-
       <a class="brand" href="index.html">
-        <div class="brand-mark">
-          <span>TM</span>
-        </div>
-
+        <div class="brand-mark"><span>TM</span></div>
         <span>TempMail Box</span>
       </a>
-
       <nav class="nav">
         <a href="index.html">Temp Mail</a>
-        <a href="guide.html">Guides</a>
+        <a href="guide.html" class="active">Guides</a>
         <a href="privacy-policy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="contact.html">Contact</a>
       </nav>
-
     </div>
   </header>
 
-
-  <!-- ================= MAIN ================= -->
-
+  <!-- Main Container -->
   <main class="page">
-
     <section class="hero">
-
-      <span class="eyebrow">
-        Master Knowledge Base
-      </span>
-
-      <h1>
-        User Guides Directory
-      </h1>
-
+      <span class="eyebrow">Knowledge Base & Tutorials</span>
+      <h1>Master Guide Directory</h1>
       <div class="gold-line"></div>
-
-      <p>
-        Explore all published TempMail Box tutorials,
-        privacy guides, security resources and technical
-        articles about temporary disposable email.
-      </p>
-
-      <div class="stats-row">
-
-        <div class="stats-badge" id="autoCountBadge">
-          📚 Total Published Guides: Loading...
-        </div>
-
-        <div class="stats-badge">
-          ⚡ Live GitHub Directory
-        </div>
-
-      </div>
-
+      <p>Browse through practical guides, security breakdowns, comparison charts, and technical temporary email tutorials.</p>
     </section>
 
-
-    <!-- ================= SEARCH ================= -->
-
-    <div class="search-box">
-
-      <span class="search-icon">
-        🔍
-      </span>
-
-      <input
-        type="text"
-        id="liveSearchInput"
-        class="search-input"
-        placeholder="Search guides by title or #number..."
-        autocomplete="off"
-      >
-
-    </div>
-
-    <div
-      id="searchStatus"
-      class="search-status">
-    </div>
-
-
-    <!-- ================= GUIDE GRID ================= -->
-
-    <div
-      class="grid"
-      id="guidesGrid">
-
-      <div class="loading-box">
-        ⏳ Loading published guides...
+    <!-- Controls -->
+    <section class="controls-wrapper">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="liveSearchInput" class="search-input" placeholder="Search by title, keyword, or #number (e.g. 009, OTP, Expiration)..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-btn">Clear</button>
       </div>
 
+      <!-- Category Filter Pills -->
+      <div class="filter-pills" id="categoryPills">
+        <button class="pill-btn active" data-cat="all">All Guides</button>
+        <button class="pill-btn" data-cat="Security & Privacy">Security & Privacy</button>
+        <button class="pill-btn" data-cat="Architecture">Architecture</button>
+        <button class="pill-btn" data-cat="Verification">Verification / OTP</button>
+        <button class="pill-btn" data-cat="Comparison">Comparisons</button>
+        <button class="pill-btn" data-cat="General Guides">General</button>
+      </div>
+    </section>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span id="resultsCount">Showing <strong class="status-count" id="countNumber">0</strong> articles</span>
+      <span id="syncBadge">⚡ GitHub Live Sync</span>
     </div>
 
+    <!-- Cards Grid -->
+    <div class="grid" id="guidesGrid">
+      <div class="state-box">⏳ Fetching guides from repository...</div>
+    </div>
   </main>
 
-
-  <!-- ================= FOOTER ================= -->
-
+  <!-- Footer -->
   <footer class="site-footer">
-
     <div class="footer-inner">
-
-      <div class="footer-title">
-        Quick Links
-      </div>
-
+      <div class="footer-title">Quick Links</div>
       <div class="footer-line"></div>
-
       <div class="footer-links">
-
-        <a href="contact.html">
-          Contact Us
-        </a>
-
-        <a href="terms.html">
-          Terms of Use
-        </a>
-
-        <a href="privacy-policy.html">
-          Privacy Policy
-        </a>
-
-        <a href="california-privacy.html">
-          California Privacy Statement
-        </a>
-
-        <a href="cookie-notice.html">
-          Cookie Notice
-        </a>
-
+        <a href="contact.html">Contact Us</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="california-privacy.html">California Privacy Statement</a>
+        <a href="cookie-notice.html">Cookie Notice</a>
       </div>
 
-
-      <div
-        class="footer-title"
-        style="margin-top:42px">
-
-        Related Sites
-
-      </div>
-
+      <div class="footer-title" style="margin-top:35px">Related Network</div>
       <div class="footer-line"></div>
-
       <div class="footer-links">
-
-        <a
-          href="https://pdfgridbox.in"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          PDFGridBox.in
-
-        </a>
-
-        <a
-          href="https://besttools.pdfgridbox.in"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          BestTools
-
-        </a>
-
-        <a
-          href="https://gujaratfastalert.in"
-          target="_blank"
-          rel="noopener noreferrer">
-
-          GujaratFastAlert.in
-
-        </a>
-
+        <a href="https://pdfgridbox.in" target="_blank" rel="noopener noreferrer">PDFGridBox.in</a>
+        <a href="https://besttools.pdfgridbox.in" target="_blank" rel="noopener noreferrer">BestTools</a>
+        <a href="https://gujaratfastalert.in" target="_blank" rel="noopener noreferrer">GujaratFastAlert.in</a>
       </div>
-
 
       <div class="copyright">
-
-        © 2026 TempMail Box. All Rights Reserved.
-
-        <br>
-
-        <span
-          style="
-            display:inline-block;
-            margin-top:8px;
-            color:#a8a8a8;
-          ">
-
-          Managed and Published by
-
-          <strong style="color:var(--gold);">
-            Vanrajsinh Vaghela
-          </strong>
-
+        © 2026 TempMail Box. All Rights Reserved.<br>
+        <span style="display:inline-block;margin-top:6px;color:#71717a;">
+          Managed and Published by <strong style="color:var(--gold);">Vanrajsinh Vaghela</strong>
         </span>
-
       </div>
-
     </div>
-
   </footer>
 
-
-  <!-- ================= JAVASCRIPT ================= -->
-
+  <!-- Script Logic -->
   <script>
-
-    /*
-    =====================================================
-    TEMPMAIL BOX — AUTOMATIC GUIDE DIRECTORY
-    =====================================================
-
-    GitHub Repository:
-
-    https://github.com/Vanrajsinh-vaghela/tempmail
-
-    Articles are automatically read from:
-
-    /guides/
-
-    Example:
-
-    guides/
-    001-example.html
-    002-example.html
-    003-example.html
-    ...
-    260-example.html
-
-    You do NOT need to manually add cards here.
-    =====================================================
-    */
-
-
-    /* ================= GITHUB SETTINGS ================= */
-
     const GITHUB_USER = "Vanrajsinh-vaghela";
-
     const GITHUB_REPO = "tempmail";
-
     const GITHUB_BRANCH = "main";
-
     const GUIDES_FOLDER = "guides";
 
-
-    /* ================= CACHE SETTINGS ================= */
-
-    /*
-      Cache for 5 minutes.
-
-      This prevents unnecessary GitHub API requests
-      every time a visitor refreshes the page.
-    */
-
-    const CACHE_KEY = "tempmail_guides_cache_v2";
-
-    const CACHE_TIME_KEY = "tempmail_guides_cache_time_v2";
-
-    const CACHE_DURATION = 5 * 60 * 1000;
-
-
-    /* ================= GLOBAL DATA ================= */
+    const CACHE_KEY = "tempmail_guides_cache_v3";
+    const CACHE_TIME_KEY = "tempmail_guides_cache_time_v3";
+    const CACHE_DURATION = 5 * 60 * 1000; // 5 mins
 
     let allArticles = [];
+    let activeCategory = "all";
 
-
-    /* ================= HTML ESCAPE ================= */
-
-    function escapeHTML(value) {
-
-      return String(value || "")
+    function escapeHTML(str) {
+      return String(str || "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
     }
 
-
-    /* ================= TITLE FROM FILENAME ================= */
-
+    // Slug formatting with custom acronym handling
     function formatTitleFromSlug(filename) {
-
       let clean = filename
         .replace(/\.html$/i, "")
         .replace(/^\d+[-_]?/, "");
+
+      const acronyms = {
+        otp: "OTP",
+        api: "API",
+        dns: "DNS",
+        smtp: "SMTP",
+        mx: "MX",
+        ssl: "SSL",
+        tls: "TLS",
+        vs: "vs.",
+        ip: "IP",
+        ttl: "TTL",
+        spam: "Spam",
+        id: "ID"
+      };
 
       return clean
         .split(/[-_]+/)
         .filter(Boolean)
         .map(word => {
-
           const lower = word.toLowerCase();
-
-          if (lower === "otp") return "OTP";
-          if (lower === "api") return "API";
-          if (lower === "dns") return "DNS";
-          if (lower === "smtp") return "SMTP";
-          if (lower === "mx") return "MX";
-          if (lower === "ssl") return "SSL";
-          if (lower === "tls") return "TLS";
-          if (lower === "vs") return "vs.";
-
-          return word.charAt(0).toUpperCase()
-            + word.slice(1);
-
+          return acronyms[lower] || (word.charAt(0).toUpperCase() + word.slice(1));
         })
         .join(" ");
-
     }
 
-
-    /* ================= CATEGORY ================= */
-
+    // Categorizer
     function getCategory(filename) {
-
       const s = filename.toLowerCase();
-
-      if (
-        s.includes("privacy") ||
-        s.includes("security") ||
-        s.includes("anonymous") ||
-        s.includes("safe") ||
-        s.includes("safety")
-      ) {
-
+      if (s.includes("privacy") || s.includes("security") || s.includes("anonymous") || s.includes("safe") || s.includes("expire") || s.includes("purging")) {
         return "Security & Privacy";
-
       }
-
-
-      if (
-        s.includes("difference") ||
-        s.includes("comparison") ||
-        s.includes("-vs-") ||
-        s.includes("_vs_")
-      ) {
-
+      if (s.includes("difference") || s.includes("comparison") || s.includes("-vs-") || s.includes("_vs_")) {
         return "Comparison";
-
       }
-
-
-      if (
-        s.includes("architecture") ||
-        s.includes("behind-the-scenes") ||
-        s.includes("how-does-temp-mail-work") ||
-        s.includes("technical")
-      ) {
-
+      if (s.includes("architecture") || s.includes("behind-the-scenes") || s.includes("work-behind") || s.includes("technical") || s.includes("how-does")) {
         return "Architecture";
-
       }
-
-
-      if (
-        s.includes("discord") ||
-        s.includes("netflix") ||
-        s.includes("facebook") ||
-        s.includes("instagram") ||
-        s.includes("google")
-      ) {
-
-        return "App Guides";
-
-      }
-
-
-      if (
-        s.includes("otp") ||
-        s.includes("verification")
-      ) {
-
+      if (s.includes("otp") || s.includes("verification") || s.includes("inbox")) {
         return "Verification";
-
       }
-
-
-      return "Guides";
-
+      return "General Guides";
     }
 
-
-    /* ================= NUMBER SORT ================= */
-
+    // Sort: 001 -> 002 -> ... -> 260
     function numericSort(a, b) {
-
-      const numberA =
-        parseInt(a.name.match(/^\d+/)?.[0] || "999999", 10);
-
-      const numberB =
-        parseInt(b.name.match(/^\d+/)?.[0] || "999999", 10);
-
-      return numberA - numberB;
-
+      const numA = parseInt(a.name.match(/^(\d+)/)?.[1] || "999999", 10);
+      const numB = parseInt(b.name.match(/^(\d+)/)?.[1] || "999999", 10);
+      return numA - numB;
     }
-
-
-    /* ================= FETCH GITHUB ================= */
 
     async function fetchGuides() {
-
-      const grid =
-        document.getElementById("guidesGrid");
+      const grid = document.getElementById("guidesGrid");
 
       try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        const cachedTime = parseInt(localStorage.getItem(CACHE_TIME_KEY) || "0", 10);
 
-        /*
-          Check cache first.
-        */
-
-        const cached =
-          localStorage.getItem(CACHE_KEY);
-
-        const cachedTime =
-          parseInt(
-            localStorage.getItem(CACHE_TIME_KEY) || "0",
-            10
-          );
-
-
-        if (
-          cached &&
-          cachedTime &&
-          Date.now() - cachedTime < CACHE_DURATION
-        ) {
-
-          allArticles =
-            JSON.parse(cached);
-
-          renderGuides(allArticles);
-
+        if (cached && cachedTime && (Date.now() - cachedTime < CACHE_DURATION)) {
+          allArticles = JSON.parse(cached);
+          renderFilteredArticles();
           return;
-
         }
 
+        const apiURL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GUIDES_FOLDER}?ref=${GITHUB_BRANCH}`;
+        const response = await fetch(apiURL, {
+          headers: { "Accept": "application/vnd.github+json" }
+        });
 
-        /*
-          GitHub API URL
-        */
+        if (!response.ok) throw new Error("GitHub API status: " + response.status);
 
-        const apiURL =
-          `https://api.github.com/repos/` +
-          `${GITHUB_USER}/` +
-          `${GITHUB_REPO}/contents/` +
-          `${GUIDES_FOLDER}?ref=${GITHUB_BRANCH}`;
+        const files = await response.json();
 
+        // Filter out index.html and non-html files
+        const htmlFiles = files
+          .filter(file => file.type === "file" && /\.html$/i.test(file.name) && file.name.toLowerCase() !== "index.html")
+          .sort(numericSort);
 
-        const response =
-          await fetch(apiURL, {
-            headers: {
-              "Accept":
-                "application/vnd.github+json"
-            }
-          });
+        allArticles = htmlFiles.map(file => {
+          const numMatch = file.name.match(/^(\d+)/);
+          // Proper 3 digit number formatting (e.g. 001, 009, 260)
+          const number = numMatch ? numMatch[1].padStart(3, '0') : "001";
 
+          return {
+            id: number,
+            filename: file.name,
+            title: formatTitleFromSlug(file.name),
+            category: getCategory(file.name),
+            url: `${GUIDES_FOLDER}/${encodeURIComponent(file.name)}`,
+            desc: "Practical walkthrough and technical insights into disposable email behaviors, timers, and workflows."
+          };
+        });
 
-        if (!response.ok) {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(allArticles));
+        localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
 
-          throw new Error(
-            "GitHub API returned " +
-            response.status
-          );
-
-        }
-
-
-        const files =
-          await response.json();
-
-
-        /*
-          Only HTML articles.
-        */
-
-        const htmlFiles =
-          files
-            .filter(file =>
-              file.type === "file" &&
-              /\.html$/i.test(file.name)
-            )
-            .sort(numericSort);
-
-
-        /*
-          Build article objects.
-        */
-
-        allArticles =
-          htmlFiles.map(file => {
-
-            const numberMatch =
-              file.name.match(/^(\d+)/);
-
-            const number =
-              numberMatch
-                ? numberMatch[1]
-                : "00";
-
-
-            return {
-
-              id: number,
-
-              title:
-                formatTitleFromSlug(file.name),
-
-              category:
-                getCategory(file.name),
-
-              url:
-                `${GUIDES_FOLDER}/${encodeURIComponent(file.name)}`,
-
-              desc:
-                "Explore this TempMail Box guide for practical information, privacy tips, security guidance and useful temporary email knowledge."
-
-            };
-
-          });
-
-
-        /*
-          Save cache.
-        */
-
-        localStorage.setItem(
-          CACHE_KEY,
-          JSON.stringify(allArticles)
-        );
-
-        localStorage.setItem(
-          CACHE_TIME_KEY,
-          Date.now().toString()
-        );
-
-
-        renderGuides(allArticles);
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Guide directory error:",
-          error
-        );
-
-
-        /*
-          Try old cache if GitHub is temporarily unavailable.
-        */
-
-        const oldCache =
-          localStorage.getItem(CACHE_KEY);
-
-
+        renderFilteredArticles();
+      } catch (err) {
+        console.error(err);
+        const oldCache = localStorage.getItem(CACHE_KEY);
         if (oldCache) {
-
-          try {
-
-            allArticles =
-              JSON.parse(oldCache);
-
-            renderGuides(allArticles);
-
-            return;
-
-          }
-
-          catch (e) {}
-
+          allArticles = JSON.parse(oldCache);
+          renderFilteredArticles();
+          return;
         }
-
-
-        /*
-          Show error.
-        */
-
-        grid.innerHTML = `
-
-          <div class="error-box">
-
-            ⚠️ Unable to load the guide directory right now.
-
-            <br><br>
-
-            Please try again in a few moments.
-
-          </div>
-
-        `;
-
+        grid.innerHTML = `<div class="state-box" style="color:#f28b82;">⚠️ Failed to load guides from GitHub. Please refresh the page.</div>`;
       }
-
     }
 
+    function renderFilteredArticles() {
+      const grid = document.getElementById("guidesGrid");
+      const countEl = document.getElementById("countNumber");
+      const searchInput = document.getElementById("liveSearchInput").value.toLowerCase().trim();
+      const clearBtn = document.getElementById("clearSearchBtn");
 
-    /* ================= RENDER ================= */
+      clearBtn.style.display = searchInput ? "block" : "none";
 
-    function renderGuides(articles) {
+      const filtered = allArticles.filter(art => {
+        const matchesCategory = (activeCategory === "all" || art.category === activeCategory);
+        const matchesSearch = !searchInput || 
+          art.title.toLowerCase().includes(searchInput) ||
+          art.id.includes(searchInput) ||
+          art.category.toLowerCase().includes(searchInput);
 
-      const grid =
-        document.getElementById("guidesGrid");
-
-      const badge =
-        document.getElementById("autoCountBadge");
-
-
-      /*
-        Update count.
-      */
-
-      badge.textContent =
-        `📚 Total Published Guides: ${articles.length}`;
-
-
-      /*
-        No results.
-      */
-
-      if (!articles.length) {
-
-        grid.innerHTML = `
-
-          <div class="empty-box">
-
-            No guides found.
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      /*
-        Generate cards.
-      */
-
-      grid.innerHTML =
-        articles.map(article => `
-
-          <a
-            href="${escapeHTML(article.url)}"
-            class="card"
-            data-search="
-              ${escapeHTML(article.id)}
-              ${escapeHTML(article.title)}
-              ${escapeHTML(article.category)}
-            "
-          >
-
-            <div>
-
-              <div class="card-top">
-
-                <span class="card-num">
-                  #${escapeHTML(article.id)}
-                </span>
-
-                <span class="tag">
-                  ${escapeHTML(article.category)}
-                </span>
-
-              </div>
-
-
-              <h2>
-                ${escapeHTML(article.title)}
-              </h2>
-
-
-              <p>
-                ${escapeHTML(article.desc)}
-              </p>
-
-            </div>
-
-
-            <div class="card-footer">
-
-              <span>
-                TempMail Guide
-              </span>
-
-              <span class="read-more">
-                Read Guide →
-              </span>
-
-            </div>
-
-          </a>
-
-        `).join("");
-
-
-      updateSearchStatus(articles.length);
-
-    }
-
-
-    /* ================= SEARCH ================= */
-
-    function filterCardsLive() {
-
-      const input =
-        document
-          .getElementById("liveSearchInput")
-          .value
-          .toLowerCase()
-          .trim();
-
-
-      const cards =
-        document.querySelectorAll(
-          "#guidesGrid .card"
-        );
-
-
-      let visible = 0;
-
-
-      cards.forEach(card => {
-
-        const searchText =
-          card
-            .getAttribute("data-search")
-            .toLowerCase();
-
-
-        if (
-          !input ||
-          searchText.includes(input)
-        ) {
-
-          card.style.display = "flex";
-
-          visible++;
-
-        }
-
-        else {
-
-          card.style.display = "none";
-
-        }
-
+        return matchesCategory && matchesSearch;
       });
 
+      countEl.innerText = filtered.length;
 
-      updateSearchStatus(visible, input);
-
-    }
-
-
-    /* ================= SEARCH STATUS ================= */
-
-    function updateSearchStatus(
-      count,
-      search = ""
-    ) {
-
-      const status =
-        document.getElementById(
-          "searchStatus"
-        );
-
-
-      if (search) {
-
-        status.textContent =
-          `${count} guide${count === 1 ? "" : "s"} found`;
-
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="state-box">No guides matched your criteria. Try searching with another term.</div>`;
+        return;
       }
 
-      else {
-
-        status.textContent =
-          `${count} published guide${count === 1 ? "" : "s"}`;
-
-      }
-
+      grid.innerHTML = filtered.map(art => `
+        <a href="${escapeHTML(art.url)}" class="card">
+          <div>
+            <div class="card-header">
+              <span class="card-num">#${escapeHTML(art.id)}</span>
+              <span class="tag">${escapeHTML(art.category)}</span>
+            </div>
+            <h2>${escapeHTML(art.title)}</h2>
+            <p>${escapeHTML(art.desc)}</p>
+          </div>
+          <div class="card-footer">
+            <span>TempMail Guide</span>
+            <span class="read-link">Read Guide →</span>
+          </div>
+        </a>
+      `).join("");
     }
 
+    // Category Tabs Logic
+    document.querySelectorAll(".pill-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".pill-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCategory = btn.getAttribute("data-cat");
+        renderFilteredArticles();
+      });
+    });
 
-    /* ================= SEARCH EVENT ================= */
+    // Search Box Logic
+    const searchField = document.getElementById("liveSearchInput");
+    searchField.addEventListener("input", renderFilteredArticles);
 
-    document
-      .getElementById("liveSearchInput")
-      .addEventListener(
-        "input",
-        filterCardsLive
-      );
+    document.getElementById("clearSearchBtn").addEventListener("click", () => {
+      searchField.value = "";
+      renderFilteredArticles();
+      searchField.focus();
+    });
 
-
-    /* ================= START ================= */
-
+    // Initialize
     fetchGuides();
-
   </script>
-
 </body>
 </html>
