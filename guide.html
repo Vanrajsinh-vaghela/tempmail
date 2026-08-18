@@ -136,7 +136,7 @@
       <div class="gold-line"></div>
       <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
       
-      <div class="stats-badge">📚 Total Published Guides: 007</div>
+      <div class="stats-badge" id="autoCountBadge">📚 Total Published Guides: 008</div>
     </section>
 
     <!-- In-Page Fast Filter -->
@@ -145,7 +145,7 @@
       <input type="text" id="liveSearchInput" class="search-input" placeholder="Quick search guides by title or #number..." onkeyup="filterCardsLive()">
     </div>
 
-    <!-- MASTER SEQUENTIAL GRID (#001 -> #007) -->
+    <!-- MASTER SEQUENTIAL GRID (#001 -> #008) -->
     <div class="grid" id="guidesGrid">
 
       <!-- ARTICLE #001 -->
@@ -249,13 +249,29 @@
         <div>
           <div class="card-top">
             <span class="card-num">#007</span>
-            <span class="tag">Privacy & Security</span>
+            <span class="tag">Security & Privacy</span>
           </div>
           <h2>Temporary Email vs Permanent Email: Privacy Comparison</h2>
           <p>Learn how data brokers track persistent inboxes, how disposable mail prevents profiling, and when to use each.</p>
         </div>
         <div class="card-footer">
           <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #008 -->
+      <a href="guides/008-what-is-a-temporary-inbox-and-why-you-need-one.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#008</span>
+            <span class="tag">Guides</span>
+          </div>
+          <h2>What Is a Temporary Inbox and Why You Need One</h2>
+          <p>Discover how disposable email stops spam, protects personal privacy, blocks tracking pixels, and prevents data leaks.</p>
+        </div>
+        <div class="card-footer">
+          <span>5 min read</span>
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
@@ -293,6 +309,12 @@
   </footer>
 
   <script>
+    function updateCounter() {
+      const cards = document.querySelectorAll('.card');
+      const countStr = String(cards.length).padStart(3, '0');
+      document.getElementById('autoCountBadge').innerText = `📚 Total Published Guides: ${countStr}`;
+    }
+
     function filterCardsLive() {
       const input = document.getElementById('liveSearchInput').value.toLowerCase().trim();
       const cards = document.querySelectorAll('.card');
@@ -302,6 +324,8 @@
         card.style.display = text.includes(input) ? 'flex' : 'none';
       });
     }
+
+    updateCounter();
   </script>
 
 </body>
