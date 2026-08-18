@@ -44,36 +44,41 @@
     .nav { display: flex; gap: 20px; font-size: 13px; color: #d5d5d5; }
     .nav a:hover { color: var(--gold); }
 
-    .page { max-width: 1000px; margin: auto; padding: 50px 20px 80px; }
-    .hero { text-align: center; padding: 10px 0 30px; }
+    .page { max-width: 1000px; margin: auto; padding: 40px 20px 80px; }
+    .hero { text-align: center; padding: 10px 0 25px; }
     .eyebrow { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px; }
-    h1 { font-size: clamp(32px, 6vw, 50px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; color: #fff; }
-    .gold-line { height: 3px; max-width: 480px; margin: 18px auto 26px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
-    .hero p { color: var(--muted); font-size: 16px; max-width: 620px; margin: auto; }
+    h1 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; color: #fff; }
+    .gold-line { height: 3px; max-width: 480px; margin: 18px auto 24px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
+    .hero p { color: var(--muted); font-size: 15px; max-width: 620px; margin: auto; }
 
-    .categories { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; }
+    /* Category Filter Tabs */
+    .categories { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
     .cat-btn {
       background: #0d0d0d; border: 1px solid #242424; color: #aaa;
-      padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      padding: 7px 15px; border-radius: 20px; font-size: 12px; font-weight: 600;
       cursor: pointer; transition: .2s;
     }
     .cat-btn:hover, .cat-btn.active {
       background: var(--gold); color: #050505; border-color: var(--gold); font-weight: 700;
     }
 
-    .search-box { max-width: 540px; margin: 0 auto 35px; position: relative; }
+    /* Search Box & Stats Bar */
+    .search-box { max-width: 540px; margin: 0 auto 15px; position: relative; }
     .search-input {
       width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
-      border-radius: 12px; padding: 14px 18px 14px 44px; color: #fff;
-      font-size: 15px; font-family: inherit; outline: none; transition: .2s;
+      border-radius: 12px; padding: 13px 18px 13px 44px; color: #fff;
+      font-size: 14px; font-family: inherit; outline: none; transition: .2s;
     }
     .search-input:focus { border-color: var(--gold); }
-    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #666; font-size: 16px; }
+    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #666; font-size: 15px; }
+    
+    .stats-bar { text-align: center; font-size: 12px; color: #666; margin-bottom: 25px; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    /* Articles Grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; min-height: 400px; }
     .card {
       background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
-      border-radius: 16px; padding: 24px; display: flex; flex-direction: column;
+      border-radius: 16px; padding: 22px; display: flex; flex-direction: column;
       justify-content: space-between; transition: transform .2s, border-color .2s;
     }
     .card:hover { transform: translateY(-4px); border-color: #443722; }
@@ -83,13 +88,35 @@
       background: #18140a; border: 1px solid #3d3118; padding: 4px 10px; border-radius: 6px;
       display: inline-block; margin-bottom: 12px;
     }
-    .card h2 { font-size: 17px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; }
+    .card h2 { font-size: 16px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; }
     .card:hover h2 { color: var(--gold); }
-    .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 18px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 14px; margin-top: auto; font-size: 12px; color: #777; }
+    .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 12px; margin-top: auto; font-size: 12px; color: #777; }
     .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
 
-    .loading-text { grid-column: 1 / -1; text-align: center; color: #666; padding: 40px; font-size: 14px; }
+    /* Pagination UI */
+    .pagination {
+      display: flex; justify-content: center; align-items: center;
+      gap: 6px; margin-top: 45px; flex-wrap: wrap;
+    }
+    .page-btn {
+      background: #0d0d0d; border: 1px solid #242424; color: #bbb;
+      min-width: 38px; height: 38px; padding: 0 12px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: .2s;
+    }
+    .page-btn:hover:not(:disabled) {
+      background: #1a1a1a; border-color: var(--gold); color: #fff;
+    }
+    .page-btn.active {
+      background: var(--gold); border-color: var(--gold); color: #050505; font-weight: 800;
+    }
+    .page-btn:disabled {
+      opacity: 0.3; cursor: not-allowed;
+    }
+    .page-ellipsis { color: #555; padding: 0 4px; font-size: 14px; }
+
+    .loading-text { grid-column: 1 / -1; text-align: center; color: #666; padding: 50px; font-size: 14px; }
 
     .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
     .footer-inner { max-width: 1000px; margin: auto; }
@@ -102,7 +129,7 @@
     @media (max-width: 700px) {
       .header-inner { padding: 12px 14px; }
       .nav { display: none; }
-      .page { padding: 35px 16px 60px; }
+      .page { padding: 30px 16px 60px; }
       .grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -124,7 +151,7 @@
     </div>
   </header>
 
-  <main class="page">
+  <main class="page" id="mainContent">
     <section class="hero">
       <span class="eyebrow">Knowledge Base & Guides</span>
       <h1>User Guides & Articles</h1>
@@ -137,15 +164,21 @@
       <button class="cat-btn active" onclick="filterCategory('All')">All</button>
     </div>
 
+    <!-- Search Box -->
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="text" id="articleSearch" class="search-input" placeholder="Search guides..." onkeyup="renderArticles()">
+      <input type="text" id="articleSearch" class="search-input" placeholder="Search across all guides..." onkeyup="handleSearch()">
     </div>
 
-    <!-- Live Auto-Generated Grid -->
+    <div class="stats-bar" id="statsBar">Scanning directory...</div>
+
+    <!-- Grid Container -->
     <div class="grid" id="articlesGrid">
-      <div class="loading-text">Scanning guides directory...</div>
+      <div class="loading-text">Loading articles...</div>
     </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination" id="paginationContainer"></div>
   </main>
 
   <footer class="site-footer">
@@ -178,19 +211,22 @@
   </footer>
 
   <script>
-    // Exact Repository Configuration
     const GITHUB_USER = "Vanrajsinh-vaghela";
-    const GITHUB_REPO = "tempmail"; 
+    const GITHUB_REPO = "tempmail";
+    const ITEMS_PER_PAGE = 12; // 12 cards per page
 
     let allArticles = [];
+    let filteredList = [];
+    let currentPage = 1;
     let activeCategory = 'All';
 
     function detectCategory(name) {
       const low = name.toLowerCase();
       if (low.includes('otp') || low.includes('verification')) return 'OTP & Verification';
       if (low.includes('discord')) return 'Discord';
-      if (low.includes('what-is') || low.includes('how') || low.includes('architecture')) return 'Architecture';
-      if (low.includes('netflix') || low.includes('trial')) return 'Entertainment';
+      if (low.includes('what-is') || low.includes('how') || low.includes('architecture') || low.includes('behind-the-scenes')) return 'Architecture';
+      if (low.includes('safe') || low.includes('anonymous') || low.includes('security') || low.includes('privacy')) return 'Security & Privacy';
+      if (low.includes('netflix') || low.includes('trial') || low.includes('spotify')) return 'Entertainment';
       if (low.includes('telegram')) return 'Telegram';
       return 'Guides';
     }
@@ -206,16 +242,15 @@
 
     async function fetchGuides() {
       const grid = document.getElementById('articlesGrid');
-      const cacheKey = 'tempmail_guides_cache_v2';
-      const cacheTimeKey = 'tempmail_guides_time_v2';
+      const cacheKey = 'tempmail_guides_cache_v3';
+      const cacheTimeKey = 'tempmail_guides_time_v3';
       const cachedData = localStorage.getItem(cacheKey);
       const cachedTime = localStorage.getItem(cacheTimeKey);
 
-      // Cache validation: 2 minutes
-      if (cachedData && cachedTime && (Date.now() - parseInt(cachedTime) < 120000)) {
+      // 3-minute auto cache check
+      if (cachedData && cachedTime && (Date.now() - parseInt(cachedTime) < 180000)) {
         allArticles = JSON.parse(cachedData);
-        setupCategories();
-        renderArticles();
+        initDisplay();
         return;
       }
 
@@ -247,17 +282,20 @@
         localStorage.setItem(cacheKey, JSON.stringify(allArticles));
         localStorage.setItem(cacheTimeKey, Date.now().toString());
 
-        setupCategories();
-        renderArticles();
+        initDisplay();
       } catch (err) {
         if (cachedData) {
           allArticles = JSON.parse(cachedData);
-          setupCategories();
-          renderArticles();
+          initDisplay();
         } else {
-          grid.innerHTML = '<div class="loading-text">Unable to scan guides directory. Please ensure the repository is Public.</div>';
+          grid.innerHTML = '<div class="loading-text">Unable to load guides directory. Verify GitHub connection.</div>';
         }
       }
+    }
+
+    function initDisplay() {
+      setupCategories();
+      applyFilters();
     }
 
     function setupCategories() {
@@ -270,28 +308,48 @@
 
     function filterCategory(cat) {
       activeCategory = cat;
+      currentPage = 1;
       document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText === cat);
       });
-      renderArticles();
+      applyFilters();
     }
 
-    function renderArticles() {
-      const query = document.getElementById('articleSearch').value.toLowerCase();
-      const grid = document.getElementById('articlesGrid');
+    function handleSearch() {
+      currentPage = 1;
+      applyFilters();
+    }
 
-      const filtered = allArticles.filter(item => {
+    function applyFilters() {
+      const query = document.getElementById('articleSearch').value.toLowerCase().trim();
+
+      filteredList = allArticles.filter(item => {
         const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
-        const matchesQuery = item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query);
+        const matchesQuery = item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query) || item.id.includes(query);
         return matchesCategory && matchesQuery;
       });
 
-      if (filtered.length === 0) {
+      renderCurrentPage();
+      renderPaginationControls();
+    }
+
+    function renderCurrentPage() {
+      const grid = document.getElementById('articlesGrid');
+      const statsBar = document.getElementById('statsBar');
+
+      if (filteredList.length === 0) {
         grid.innerHTML = '<div class="loading-text">No articles found matching your query.</div>';
+        statsBar.innerText = '0 articles found';
         return;
       }
 
-      grid.innerHTML = filtered.map(item => `
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredList.length);
+      const currentItems = filteredList.slice(startIndex, endIndex);
+
+      statsBar.innerText = `Showing ${startIndex + 1}–${endIndex} of ${filteredList.length} articles (Page ${currentPage})`;
+
+      grid.innerHTML = currentItems.map(item => `
         <a href="${item.url}" class="card article-item">
           <div>
             <div class="card-num">#${item.id}</div>
@@ -305,6 +363,43 @@
           </div>
         </a>
       `).join('');
+    }
+
+    function renderPaginationControls() {
+      const container = document.getElementById('paginationContainer');
+      const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
+
+      if (totalPages <= 1) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let html = `
+        <button class="page-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+          html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        } else if (i === currentPage - 2 || i === currentPage + 2) {
+          html += `<span class="page-ellipsis">...</span>`;
+        }
+      }
+
+      html += `
+        <button class="page-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function goToPage(pageNumber) {
+      const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
+      if (pageNumber < 1 || pageNumber > totalPages) return;
+      currentPage = pageNumber;
+      renderCurrentPage();
+      renderPaginationControls();
+      document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
     }
 
     fetchGuides();
