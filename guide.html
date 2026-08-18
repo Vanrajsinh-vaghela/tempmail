@@ -154,9 +154,7 @@
     </section>
 
     <!-- Dynamic Category Filter Tabs -->
-    <div class="categories" id="categoryContainer">
-      <button class="cat-btn active" onclick="filterCategory('All')">All</button>
-    </div>
+    <div class="categories" id="categoryContainer"></div>
 
     <!-- Search Box -->
     <div class="search-box">
@@ -164,12 +162,10 @@
       <input type="text" id="articleSearch" class="search-input" placeholder="Search across all guides..." onkeyup="handleSearch()">
     </div>
 
-    <div class="stats-bar" id="statsBar">Fetching latest articles...</div>
+    <div class="stats-bar" id="statsBar"></div>
 
     <!-- Grid Container -->
-    <div class="grid" id="articlesGrid">
-      <div class="loading-text">Loading fresh articles from directory...</div>
-    </div>
+    <div class="grid" id="articlesGrid"></div>
 
     <!-- Pagination Controls -->
     <div class="pagination" id="paginationContainer"></div>
@@ -205,80 +201,74 @@
   </footer>
 
   <script>
-    const GITHUB_USER = "Vanrajsinh-vaghela";
-    const GITHUB_REPO = "tempmail";
-    const ITEMS_PER_PAGE = 12;
+    // ========================================================
+    // 📚 MASTER ARTICLES DATABASE (Instant Local Load, 0 Errors)
+    // ========================================================
+    const allArticles = [
+      {
+        id: "001",
+        category: "OTP & Verification",
+        title: "Temporary Email for OTP: How to Receive Verification Codes Safely",
+        desc: "Learn how to safely use disposable email for receiving short-term OTPs and verification messages without risking personal inbox privacy.",
+        url: "guides/001-temporary-email-for-otp.html",
+        readTime: "5 min read"
+      },
+      {
+        id: "002",
+        category: "Guides",
+        title: "What Is Disposable Email? (Complete Guide for Beginners)",
+        desc: "Discover what disposable email is, how temporary inboxes work, key benefits for spam prevention, privacy realities, and practical safe usage.",
+        url: "guides/002-what-is-disposable-email.html",
+        readTime: "5 min read"
+      },
+      {
+        id: "003",
+        category: "Architecture",
+        title: "What Is Temporary Email and How Does It Work?",
+        desc: "A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.",
+        url: "guides/003-what-is-temporary-email-and-how-does-it-work.html",
+        readTime: "6 min read"
+      },
+      {
+        id: "004",
+        category: "Security & Privacy",
+        title: "Is Temporary Email Safe? Risks, Privacy Realities & Best Practices",
+        desc: "Learn about the security realities, data retention models, and practical safety precautions when using disposable email services.",
+        url: "guides/004-is-temporary-email-safe.html",
+        readTime: "5 min read"
+      },
+      {
+        id: "005",
+        category: "Guides",
+        title: "How Long Does Temporary Email Last Before Expiring?",
+        desc: "Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid losing verification access.",
+        url: "guides/005-how-long-does-temporary-email-last-before-expiring.html",
+        readTime: "5 min read"
+      },
+      {
+        id: "006",
+        category: "Security & Privacy",
+        title: "Are Temporary Emails Completely Anonymous and Safe?",
+        desc: "Understand the critical difference between inbox privacy and true online anonymity when using disposable email services.",
+        url: "guides/006-are-temporary-emails-completely-anonymous-and-safe.html",
+        readTime: "6 min read"
+      },
+      {
+        id: "007",
+        category: "Architecture",
+        title: "How Does Temp Mail Work Behind the Scenes?",
+        desc: "A comprehensive technical breakdown of disposable mail systems: DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.",
+        url: "guides/007-how-does-temp-mail-work-behind-the-scenes.html",
+        readTime: "6 min read"
+      }
+    ];
 
-    let allArticles = [];
+    const ITEMS_PER_PAGE = 12; // 12 cards per page
     let filteredList = [];
     let currentPage = 1;
     let activeCategory = 'All';
 
-    // Clear old localStorage permanently
-    try {
-      localStorage.clear();
-    } catch(e) {}
-
-    function detectCategory(name) {
-      const low = name.toLowerCase();
-      if (low.includes('otp') || low.includes('verification')) return 'OTP & Verification';
-      if (low.includes('discord')) return 'Discord';
-      if (low.includes('what-is') || low.includes('how') || low.includes('architecture') || low.includes('behind-the-scenes')) return 'Architecture';
-      if (low.includes('safe') || low.includes('anonymous') || low.includes('security') || low.includes('privacy')) return 'Security & Privacy';
-      if (low.includes('netflix') || low.includes('trial') || low.includes('spotify')) return 'Entertainment';
-      if (low.includes('telegram')) return 'Telegram';
-      return 'Guides';
-    }
-
-    function formatTitle(name) {
-      return name
-        .replace(".html", "")
-        .replace(/^\d+-/, "")
-        .split("-")
-        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(" ");
-    }
-
-    async function fetchGuides() {
-      const grid = document.getElementById('articlesGrid');
-
-      try {
-        // Direct Fresh Network Request (Bypasses all cache)
-        const timestamp = new Date().getTime();
-        const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides?_t=${timestamp}`, {
-          headers: { 'Cache-Control': 'no-cache' }
-        });
-
-        if (!res.ok) throw new Error("GitHub API Network Error");
-        const files = await res.json();
-
-        const htmlFiles = files
-          .filter(f => f.name.endsWith('.html'))
-          .sort((a, b) => a.name.localeCompare(b.name));
-
-        allArticles = htmlFiles.map(f => {
-          const numMatch = f.name.match(/^(\d+)/);
-          const id = numMatch ? numMatch[1] : '00';
-          const title = formatTitle(f.name);
-          const category = detectCategory(f.name);
-
-          return {
-            id: id,
-            category: category,
-            title: title,
-            desc: `Complete step-by-step instructions, safety tips, and guidance on ${title.toLowerCase()}.`,
-            url: `guides/${f.name}`,
-            readTime: '5 min read'
-          };
-        });
-
-        initDisplay();
-      } catch (err) {
-        grid.innerHTML = '<div class="loading-text">Unable to load guides. Please check your internet connection or refresh.</div>';
-      }
-    }
-
-    function initDisplay() {
+    function initPage() {
       setupCategories();
       applyFilters();
     }
@@ -387,7 +377,8 @@
       document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
     }
 
-    fetchGuides();
+    // Direct render on load
+    initPage();
   </script>
 </body>
 </html>
