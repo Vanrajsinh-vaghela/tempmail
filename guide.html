@@ -72,7 +72,7 @@
     
     .stats-bar { text-align: center; font-size: 12px; color: #666; margin-bottom: 25px; }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; min-height: 350px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
     .card {
       background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
       border-radius: 16px; padding: 22px; display: flex; flex-direction: column;
@@ -90,27 +90,6 @@
     .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
     .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 12px; margin-top: auto; font-size: 12px; color: #777; }
     .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
-
-    .pagination {
-      display: flex; justify-content: center; align-items: center;
-      gap: 6px; margin-top: 40px; flex-wrap: wrap;
-    }
-    .page-btn {
-      background: #0d0d0d; border: 1px solid #242424; color: #bbb;
-      min-width: 38px; height: 38px; padding: 0 12px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 600; cursor: pointer; transition: .2s;
-    }
-    .page-btn:hover:not(:disabled) {
-      background: #1a1a1a; border-color: var(--gold); color: #fff;
-    }
-    .page-btn.active {
-      background: var(--gold); border-color: var(--gold); color: #050505; font-weight: 800;
-    }
-    .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .page-ellipsis { color: #555; padding: 0 4px; font-size: 14px; }
-
-    .loading-text { grid-column: 1 / -1; text-align: center; color: #666; padding: 50px; font-size: 14px; }
 
     .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
     .footer-inner { max-width: 1000px; margin: auto; }
@@ -153,22 +132,19 @@
       <p>Explore step-by-step tutorials, safety tips, and guides on using temporary disposable email addresses for OTP verification.</p>
     </section>
 
-    <!-- Dynamic Category Filter Tabs -->
+    <!-- Category Filter Tabs -->
     <div class="categories" id="categoryContainer"></div>
 
     <!-- Search Box -->
     <div class="search-box">
       <span class="search-icon">🔍</span>
-      <input type="text" id="articleSearch" class="search-input" placeholder="Search across all guides..." onkeyup="handleSearch()">
+      <input type="text" id="articleSearch" class="search-input" placeholder="Search across all guides..." onkeyup="renderCards()">
     </div>
 
     <div class="stats-bar" id="statsBar"></div>
 
     <!-- Grid Container -->
     <div class="grid" id="articlesGrid"></div>
-
-    <!-- Pagination Controls -->
-    <div class="pagination" id="paginationContainer"></div>
   </main>
 
   <footer class="site-footer">
@@ -201,9 +177,7 @@
   </footer>
 
   <script>
-    // ========================================================
-    // 📚 5 MASTER ARTICLES (100% MATCHED WITH GITHUB FILES)
-    // ========================================================
+    // EXACT MATCHED ARTICLES (001 TO 005)
     const allArticles = [
       {
         id: "001",
@@ -247,14 +221,11 @@
       }
     ];
 
-    const ITEMS_PER_PAGE = 12;
-    let filteredList = [];
-    let currentPage = 1;
     let activeCategory = 'All';
 
-    function initPage() {
+    function init() {
       setupCategories();
-      applyFilters();
+      renderCards();
     }
 
     function setupCategories() {
@@ -267,48 +238,31 @@
 
     function filterCategory(cat) {
       activeCategory = cat;
-      currentPage = 1;
       document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText === cat);
       });
-      applyFilters();
+      renderCards();
     }
 
-    function handleSearch() {
-      currentPage = 1;
-      applyFilters();
-    }
-
-    function applyFilters() {
+    function renderCards() {
       const query = document.getElementById('articleSearch').value.toLowerCase().trim();
+      const grid = document.getElementById('articlesGrid');
+      const statsBar = document.getElementById('statsBar');
 
-      filteredList = allArticles.filter(item => {
+      const filtered = allArticles.filter(item => {
         const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
         const matchesQuery = item.title.toLowerCase().includes(query) || item.desc.toLowerCase().includes(query) || item.id.includes(query);
         return matchesCategory && matchesQuery;
       });
 
-      renderCurrentPage();
-      renderPaginationControls();
-    }
+      statsBar.innerText = `Showing ${filtered.length} of ${allArticles.length} guides`;
 
-    function renderCurrentPage() {
-      const grid = document.getElementById('articlesGrid');
-      const statsBar = document.getElementById('statsBar');
-
-      if (filteredList.length === 0) {
-        grid.innerHTML = '<div class="loading-text">No articles found matching your query.</div>';
-        statsBar.innerText = '0 articles found';
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; color:#777; padding:40px;">No articles found.</div>';
         return;
       }
 
-      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-      const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredList.length);
-      const currentItems = filteredList.slice(startIndex, endIndex);
-
-      statsBar.innerText = `Showing ${startIndex + 1}–${endIndex} of ${filteredList.length} articles`;
-
-      grid.innerHTML = currentItems.map(item => `
+      grid.innerHTML = filtered.map(item => `
         <a href="${item.url}" class="card article-item">
           <div>
             <div class="card-num">#${item.id}</div>
@@ -324,35 +278,7 @@
       `).join('');
     }
 
-    function renderPaginationControls() {
-      const container = document.getElementById('paginationContainer');
-      const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
-
-      if (totalPages <= 1) {
-        container.innerHTML = '';
-        return;
-      }
-
-      let html = `<button class="page-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>`;
-
-      for (let i = 1; i <= totalPages; i++) {
-        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-      }
-
-      html += `<button class="page-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
-      container.innerHTML = html;
-    }
-
-    function goToPage(pageNumber) {
-      const totalPages = Math.ceil(filteredList.length / ITEMS_PER_PAGE);
-      if (pageNumber < 1 || pageNumber > totalPages) return;
-      currentPage = pageNumber;
-      renderCurrentPage();
-      renderPaginationControls();
-      document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    initPage();
+    init();
   </script>
 </body>
 </html>
