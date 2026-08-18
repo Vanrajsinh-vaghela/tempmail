@@ -152,7 +152,7 @@
     /* ================= CONTROLS (SEARCH & FILTERS) ================= */
     .controls-wrapper {
       max-width: 820px;
-      margin: 0 auto 35px;
+      margin: 0 auto 25px;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -230,24 +230,51 @@
       font-weight: 700;
     }
 
+    /* Status & Controls Bar */
     .status-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 12.5px;
       color: #71717a;
-      padding: 0 4px;
+      padding: 0 4px 12px;
       border-bottom: 1px solid var(--line);
-      padding-bottom: 12px;
       margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     .status-count { color: var(--gold); font-weight: 700; }
+    
+    .status-controls-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .page-size-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #9496a1;
+    }
+    .page-size-select {
+      background: #111116;
+      border: 1px solid var(--card-border);
+      color: #f5f5f7;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+    .page-size-select:focus { border-color: var(--gold); }
 
     /* ================= GUIDE GRID ================= */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 18px;
+      min-height: 250px;
     }
 
     .card {
@@ -342,6 +369,57 @@
       font-size: 14px;
     }
 
+    /* ================= PAGINATION ================= */
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-top: 38px;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: #a1a1aa;
+      min-width: 38px;
+      height: 38px;
+      padding: 0 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .page-btn:hover:not(:disabled):not(.dots) {
+      color: #fff;
+      border-color: #3e3e4f;
+      background: #15151c;
+      transform: translateY(-1px);
+    }
+    .page-btn.active {
+      background: var(--gold);
+      color: #060608;
+      border-color: var(--gold);
+      font-weight: 800;
+      box-shadow: 0 0 12px var(--gold-glow);
+    }
+    .page-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .page-btn.dots {
+      border: none;
+      background: transparent;
+      cursor: default;
+      color: #52525b;
+      min-width: 24px;
+    }
+
     /* ================= FOOTER ================= */
     .site-footer {
       border-top: 1px solid var(--line);
@@ -386,6 +464,9 @@
       .page { padding: 25px 14px 50px; }
       .grid { grid-template-columns: 1fr; }
       .controls-wrapper { gap: 12px; }
+      .status-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .status-controls-right { width: 100%; justify-content: space-between; }
+      .page-btn { min-width: 34px; height: 34px; font-size: 12px; }
     }
   </style>
 </head>
@@ -422,7 +503,7 @@
     <section class="controls-wrapper">
       <div class="search-box">
         <span class="search-icon">🔍</span>
-        <input type="text" id="liveSearchInput" class="search-input" placeholder="Search by title, keyword, or #number (e.g. 009, OTP, Expiration)..." autocomplete="off">
+        <input type="text" id="liveSearchInput" class="search-input" placeholder="Search by title, keyword, or #number (e.g. 019, OTP, Free Trial)..." autocomplete="off">
         <button id="clearSearchBtn" class="clear-btn">Clear</button>
       </div>
 
@@ -437,16 +518,31 @@
       </div>
     </section>
 
-    <!-- Status Bar -->
-    <div class="status-bar">
-      <span id="resultsCount">Showing <strong class="status-count" id="countNumber">0</strong> articles</span>
-      <span id="syncBadge">⚡ GitHub Live Sync</span>
+    <!-- Status Bar & Items Per Page -->
+    <div class="status-bar" id="statusBar">
+      <span id="resultsCount">Showing <strong class="status-count" id="countRange">0</strong> of <strong class="status-count" id="countTotal">0</strong> articles</span>
+      
+      <div class="status-controls-right">
+        <div class="page-size-wrap">
+          <span>Per page:</span>
+          <select id="pageSizeSelect" class="page-size-select">
+            <option value="9" selected>9</option>
+            <option value="18">18</option>
+            <option value="36">36</option>
+            <option value="9999">All</option>
+          </select>
+        </div>
+        <span id="syncBadge">⚡ Live Sync</span>
+      </div>
     </div>
 
     <!-- Cards Grid -->
     <div class="grid" id="guidesGrid">
       <div class="state-box">⏳ Fetching guides from repository...</div>
     </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="paginationContainer"></div>
   </main>
 
   <!-- Footer -->
@@ -486,12 +582,14 @@
     const GITHUB_BRANCH = "main";
     const GUIDES_FOLDER = "guides";
 
-    const CACHE_KEY = "tempmail_guides_cache_v3";
-    const CACHE_TIME_KEY = "tempmail_guides_cache_time_v3";
-    const CACHE_DURATION = 5 * 60 * 1000; // 5 mins
+    const CACHE_KEY = "tempmail_guides_cache_v4";
+    const CACHE_TIME_KEY = "tempmail_guides_cache_time_v4";
+    const CACHE_DURATION = 0; // Live check
 
     let allArticles = [];
     let activeCategory = "all";
+    let currentPage = 1;
+    let pageSize = 9;
 
     function escapeHTML(str) {
       return String(str || "")
@@ -520,7 +618,8 @@
         ip: "IP",
         ttl: "TTL",
         spam: "Spam",
-        id: "ID"
+        id: "ID",
+        qa: "QA"
       };
 
       return clean
@@ -536,7 +635,7 @@
     // Categorizer
     function getCategory(filename) {
       const s = filename.toLowerCase();
-      if (s.includes("privacy") || s.includes("security") || s.includes("anonymous") || s.includes("safe") || s.includes("expire") || s.includes("purging")) {
+      if (s.includes("privacy") || s.includes("security") || s.includes("anonymous") || s.includes("safe") || s.includes("expire") || s.includes("purging") || s.includes("checklist")) {
         return "Security & Privacy";
       }
       if (s.includes("difference") || s.includes("comparison") || s.includes("-vs-") || s.includes("_vs_")) {
@@ -545,7 +644,7 @@
       if (s.includes("architecture") || s.includes("behind-the-scenes") || s.includes("work-behind") || s.includes("technical") || s.includes("how-does")) {
         return "Architecture";
       }
-      if (s.includes("otp") || s.includes("verification") || s.includes("inbox")) {
+      if (s.includes("otp") || s.includes("verification") || s.includes("trial") || s.includes("testing") || s.includes("signup")) {
         return "Verification";
       }
       return "General Guides";
@@ -565,7 +664,7 @@
         const cached = localStorage.getItem(CACHE_KEY);
         const cachedTime = parseInt(localStorage.getItem(CACHE_TIME_KEY) || "0", 10);
 
-        if (cached && cachedTime && (Date.now() - cachedTime < CACHE_DURATION)) {
+        if (CACHE_DURATION > 0 && cached && cachedTime && (Date.now() - cachedTime < CACHE_DURATION)) {
           allArticles = JSON.parse(cached);
           renderFilteredArticles();
           return;
@@ -587,7 +686,6 @@
 
         allArticles = htmlFiles.map(file => {
           const numMatch = file.name.match(/^(\d+)/);
-          // Proper 3 digit number formatting (e.g. 001, 009, 260)
           const number = numMatch ? numMatch[1].padStart(3, '0') : "001";
 
           return {
@@ -600,8 +698,10 @@
           };
         });
 
-        localStorage.setItem(CACHE_KEY, JSON.stringify(allArticles));
-        localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+        if (CACHE_DURATION > 0) {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(allArticles));
+          localStorage.setItem(CACHE_TIME_KEY, Date.now().toString());
+        }
 
         renderFilteredArticles();
       } catch (err) {
@@ -618,9 +718,11 @@
 
     function renderFilteredArticles() {
       const grid = document.getElementById("guidesGrid");
-      const countEl = document.getElementById("countNumber");
+      const countRangeEl = document.getElementById("countRange");
+      const countTotalEl = document.getElementById("countTotal");
       const searchInput = document.getElementById("liveSearchInput").value.toLowerCase().trim();
       const clearBtn = document.getElementById("clearSearchBtn");
+      const paginationContainer = document.getElementById("paginationContainer");
 
       clearBtn.style.display = searchInput ? "block" : "none";
 
@@ -634,14 +736,31 @@
         return matchesCategory && matchesSearch;
       });
 
-      countEl.innerText = filtered.length;
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / pageSize) || 1;
 
-      if (!filtered.length) {
+      // Adjust page if out of bounds
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      if (!totalItems) {
         grid.innerHTML = `<div class="state-box">No guides matched your criteria. Try searching with another term.</div>`;
+        countRangeEl.innerText = "0";
+        countTotalEl.innerText = "0";
+        paginationContainer.innerHTML = "";
         return;
       }
 
-      grid.innerHTML = filtered.map(art => `
+      // Calculate slice for current page
+      const startIndex = (currentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, totalItems);
+      const pagedItems = filtered.slice(startIndex, endIndex);
+
+      countRangeEl.innerText = `${startIndex + 1}–${endIndex}`;
+      countTotalEl.innerText = totalItems;
+
+      // Render Cards
+      grid.innerHTML = pagedItems.map(art => `
         <a href="${escapeHTML(art.url)}" class="card">
           <div>
             <div class="card-header">
@@ -657,7 +776,59 @@
           </div>
         </a>
       `).join("");
+
+      // Render Pagination Buttons
+      renderPagination(totalPages);
     }
+
+    function renderPagination(totalPages) {
+      const container = document.getElementById("paginationContainer");
+      if (totalPages <= 1) {
+        container.innerHTML = "";
+        return;
+      }
+
+      let html = "";
+
+      // Previous Button
+      html += `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goToPage(${currentPage - 1})">← Prev</button>`;
+
+      // Page Number Builder with Ellipsis
+      const pages = getPageNumbers(currentPage, totalPages);
+      pages.forEach(p => {
+        if (p === '...') {
+          html += `<span class="page-btn dots">…</span>`;
+        } else {
+          html += `<button class="page-btn ${p === currentPage ? 'active' : ''}" onclick="goToPage(${p})">${p}</button>`;
+        }
+      });
+
+      // Next Button
+      html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goToPage(${currentPage + 1})">Next →</button>`;
+
+      container.innerHTML = html;
+    }
+
+    // Smart Ellipsis Algorithm (1 2 3 ... 29)
+    function getPageNumbers(current, total) {
+      if (total <= 7) {
+        return Array.from({length: total}, (_, i) => i + 1);
+      }
+      if (current <= 4) {
+        return [1, 2, 3, 4, 5, '...', total];
+      }
+      if (current >= total - 3) {
+        return [1, '...', total - 4, total - 3, total - 2, total - 1, total];
+      }
+      return [1, '...', current - 1, current, current + 1, '...', total];
+    }
+
+    window.goToPage = function(page) {
+      currentPage = page;
+      renderFilteredArticles();
+      // Smooth scroll to top of controls
+      document.querySelector('.controls-wrapper').scrollIntoView({ behavior: 'smooth' });
+    };
 
     // Category Tabs Logic
     document.querySelectorAll(".pill-btn").forEach(btn => {
@@ -665,18 +836,30 @@
         document.querySelectorAll(".pill-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         activeCategory = btn.getAttribute("data-cat");
+        currentPage = 1; // Reset to page 1
         renderFilteredArticles();
       });
     });
 
     // Search Box Logic
     const searchField = document.getElementById("liveSearchInput");
-    searchField.addEventListener("input", renderFilteredArticles);
+    searchField.addEventListener("input", () => {
+      currentPage = 1; // Reset to page 1
+      renderFilteredArticles();
+    });
 
     document.getElementById("clearSearchBtn").addEventListener("click", () => {
       searchField.value = "";
+      currentPage = 1;
       renderFilteredArticles();
       searchField.focus();
+    });
+
+    // Page Size Selector Logic
+    document.getElementById("pageSizeSelect").addEventListener("change", (e) => {
+      pageSize = parseInt(e.target.value, 10);
+      currentPage = 1;
+      renderFilteredArticles();
     });
 
     // Initialize
