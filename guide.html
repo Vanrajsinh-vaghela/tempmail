@@ -1,3 +1,5 @@
+---
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,9 +140,11 @@
       <h1>User Guides Directory</h1>
       <div class="gold-line"></div>
       <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
+
+      {% assign all_guides = site.pages | where_exp: "item", "item.path contains 'guides/'" | sort: "path" %}
       
-      <!-- Auto-Calculated Counter Badge -->
-      <div class="stats-badge" id="autoCountBadge">📚 Total Published Guides: ...</div>
+      <!-- Auto-Calculated Counter -->
+      <div class="stats-badge">📚 Total Published Guides: {{ all_guides.size }}</div>
     </section>
 
     <!-- In-Page Fast Filter -->
@@ -149,105 +153,24 @@
       <input type="text" id="liveSearchInput" class="search-input" placeholder="Quick search guides by title or #number..." onkeyup="filterCardsLive()">
     </div>
 
-    <!-- MASTER SEQUENTIAL GRID (#001 -> #006+) -->
+    <!-- AUTOMATIC JEKYLL GENERATED GRID -->
     <div class="grid" id="guidesGrid">
-
-      <!-- ARTICLE #001 -->
-      <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
+      {% for guide in all_guides %}
+      <a href="{{ guide.url | relative_url }}" class="card">
         <div>
           <div class="card-top">
-            <span class="card-num">#001</span>
-            <span class="tag">Architecture</span>
+            <span class="card-num">#{{ guide.guide_id | default: "00" }}</span>
+            <span class="tag">{{ guide.category | default: "Guides" }}</span>
           </div>
-          <h2>What Is Temporary Email and How Does It Work?</h2>
-          <p>A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #002 -->
-      <a href="guides/002-what-is-disposable-email.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#002</span>
-            <span class="tag">Guides</span>
-          </div>
-          <h2>What Is Disposable Email? (Complete Guide for Beginners)</h2>
-          <p>Discover what disposable email is, how temporary inboxes work, and practical safe usage for beginners.</p>
+          <h2>{{ guide.title | default: guide.name }}</h2>
+          <p>{{ guide.description | default: "Step-by-step instructions and safety tips." }}</p>
         </div>
         <div class="card-footer">
           <span>5 min read</span>
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
-
-      <!-- ARTICLE #003 -->
-      <a href="guides/003-how-long-does-temporary-email-last-before-expiring.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#003</span>
-            <span class="tag">Guides</span>
-          </div>
-          <h2>How Long Does Temporary Email Last Before Expiring?</h2>
-          <p>Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid lockouts.</p>
-        </div>
-        <div class="card-footer">
-          <span>5 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #004 -->
-      <a href="guides/004-are-temporary-emails-completely-anonymous-and-safe.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#004</span>
-            <span class="tag">Security & Privacy</span>
-          </div>
-          <h2>Are Temporary Emails Completely Anonymous and Safe?</h2>
-          <p>Understand the critical difference between inbox privacy and true online anonymity when using disposable email.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #005 -->
-      <a href="guides/005-how-does-temp-mail-work-behind-the-scenes.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#005</span>
-            <span class="tag">Architecture</span>
-          </div>
-          <h2>How Does Temp Mail Work Behind the Scenes?</h2>
-          <p>Technical breakdown of DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #006 -->
-      <a href="guides/006-difference-between-temporary-email-and-email-alias.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#006</span>
-            <span class="tag">Comparison</span>
-          </div>
-          <h2>Difference Between Temporary Email and Email Alias</h2>
-          <p>Compare lifespans, forwarding mechanisms, spam isolation, and recovery safety between temp mail and aliases.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
+      {% endfor %}
     </div>
   </main>
 
@@ -281,14 +204,6 @@
   </footer>
 
   <script>
-    // 1. Auto-Count Total Cards on Page
-    function updateCounter() {
-      const cards = document.querySelectorAll('.card');
-      const countStr = String(cards.length).padStart(3, '0');
-      document.getElementById('autoCountBadge').innerText = `📚 Total Published Guides: ${countStr}`;
-    }
-
-    // 2. Instant In-Page Search Filter (0ms delay, No APIs)
     function filterCardsLive() {
       const input = document.getElementById('liveSearchInput').value.toLowerCase().trim();
       const cards = document.querySelectorAll('.card');
@@ -298,8 +213,6 @@
         card.style.display = text.includes(input) ? 'flex' : 'none';
       });
     }
-
-    updateCounter();
   </script>
 
 </body>
