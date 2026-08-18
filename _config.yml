@@ -1,0 +1,3 @@
+include:
+  - guides
+markdown: kramdown
