@@ -51,7 +51,6 @@
     .gold-line { height: 3px; max-width: 480px; margin: 18px auto 24px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
     .hero p { color: var(--muted); font-size: 15px; max-width: 620px; margin: auto; }
 
-    /* Category Filter Tabs */
     .categories { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 25px; }
     .cat-btn {
       background: #0d0d0d; border: 1px solid #242424; color: #aaa;
@@ -62,7 +61,6 @@
       background: var(--gold); color: #050505; border-color: var(--gold); font-weight: 700;
     }
 
-    /* Search Box & Stats Bar */
     .search-box { max-width: 540px; margin: 0 auto 15px; position: relative; }
     .search-input {
       width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
@@ -74,8 +72,7 @@
     
     .stats-bar { text-align: center; font-size: 12px; color: #666; margin-bottom: 25px; }
 
-    /* Articles Grid */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; min-height: 400px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; min-height: 350px; }
     .card {
       background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
       border-radius: 16px; padding: 22px; display: flex; flex-direction: column;
@@ -94,10 +91,9 @@
     .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 12px; margin-top: auto; font-size: 12px; color: #777; }
     .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
 
-    /* Pagination UI */
     .pagination {
       display: flex; justify-content: center; align-items: center;
-      gap: 6px; margin-top: 45px; flex-wrap: wrap;
+      gap: 6px; margin-top: 40px; flex-wrap: wrap;
     }
     .page-btn {
       background: #0d0d0d; border: 1px solid #242424; color: #bbb;
@@ -111,9 +107,7 @@
     .page-btn.active {
       background: var(--gold); border-color: var(--gold); color: #050505; font-weight: 800;
     }
-    .page-btn:disabled {
-      opacity: 0.3; cursor: not-allowed;
-    }
+    .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .page-ellipsis { color: #555; padding: 0 4px; font-size: 14px; }
 
     .loading-text { grid-column: 1 / -1; text-align: center; color: #666; padding: 50px; font-size: 14px; }
@@ -170,11 +164,11 @@
       <input type="text" id="articleSearch" class="search-input" placeholder="Search across all guides..." onkeyup="handleSearch()">
     </div>
 
-    <div class="stats-bar" id="statsBar">Scanning directory...</div>
+    <div class="stats-bar" id="statsBar">Fetching latest articles...</div>
 
     <!-- Grid Container -->
     <div class="grid" id="articlesGrid">
-      <div class="loading-text">Loading articles...</div>
+      <div class="loading-text">Loading fresh articles from directory...</div>
     </div>
 
     <!-- Pagination Controls -->
@@ -213,12 +207,17 @@
   <script>
     const GITHUB_USER = "Vanrajsinh-vaghela";
     const GITHUB_REPO = "tempmail";
-    const ITEMS_PER_PAGE = 12; // 12 cards per page
+    const ITEMS_PER_PAGE = 12;
 
     let allArticles = [];
     let filteredList = [];
     let currentPage = 1;
     let activeCategory = 'All';
+
+    // Clear old localStorage permanently
+    try {
+      localStorage.clear();
+    } catch(e) {}
 
     function detectCategory(name) {
       const low = name.toLowerCase();
@@ -242,21 +241,15 @@
 
     async function fetchGuides() {
       const grid = document.getElementById('articlesGrid');
-      const cacheKey = 'tempmail_guides_cache_v3';
-      const cacheTimeKey = 'tempmail_guides_time_v3';
-      const cachedData = localStorage.getItem(cacheKey);
-      const cachedTime = localStorage.getItem(cacheTimeKey);
-
-      // 3-minute auto cache check
-      if (cachedData && cachedTime && (Date.now() - parseInt(cachedTime) < 180000)) {
-        allArticles = JSON.parse(cachedData);
-        initDisplay();
-        return;
-      }
 
       try {
-        const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides?t=${Date.now()}`);
-        if (!res.ok) throw new Error("API Fetch Error");
+        // Direct Fresh Network Request (Bypasses all cache)
+        const timestamp = new Date().getTime();
+        const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides?_t=${timestamp}`, {
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+
+        if (!res.ok) throw new Error("GitHub API Network Error");
         const files = await res.json();
 
         const htmlFiles = files
@@ -279,17 +272,9 @@
           };
         });
 
-        localStorage.setItem(cacheKey, JSON.stringify(allArticles));
-        localStorage.setItem(cacheTimeKey, Date.now().toString());
-
         initDisplay();
       } catch (err) {
-        if (cachedData) {
-          allArticles = JSON.parse(cachedData);
-          initDisplay();
-        } else {
-          grid.innerHTML = '<div class="loading-text">Unable to load guides directory. Verify GitHub connection.</div>';
-        }
+        grid.innerHTML = '<div class="loading-text">Unable to load guides. Please check your internet connection or refresh.</div>';
       }
     }
 
