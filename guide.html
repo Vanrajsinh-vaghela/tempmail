@@ -90,11 +90,13 @@
       background: #161616; border: 1px solid #282828; padding: 3px 8px; border-radius: 6px;
     }
 
-    .card h2 { font-size: 16px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; }
+    .card h2 { font-size: 16px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; text-transform: capitalize; }
     .card:hover h2 { color: var(--gold); }
     .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
     .card-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #161616; padding-top: 12px; margin-top: auto; font-size: 12px; color: #777; }
     .read-more { font-weight: 700; color: var(--gold); font-size: 12px; }
+    
+    .loading-box { grid-column: 1 / -1; text-align: center; color: #666; padding: 40px; font-size: 14px; }
 
     .site-footer { border-top: 1px solid #1d1d1d; background: #030303; padding: 55px 20px 30px; margin-top: 70px; }
     .footer-inner { max-width: 1000px; margin: auto; }
@@ -136,146 +138,18 @@
       <div class="gold-line"></div>
       <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
       
-      <div class="stats-badge" id="autoCountBadge">📚 Total Published Guides: 008</div>
+      <div class="stats-badge" id="autoCountBadge">📚 Total Published Guides: Loading...</div>
     </section>
 
-    <!-- In-Page Fast Filter -->
+    <!-- Fast Live Search -->
     <div class="search-box">
       <span class="search-icon">🔍</span>
       <input type="text" id="liveSearchInput" class="search-input" placeholder="Quick search guides by title or #number..." onkeyup="filterCardsLive()">
     </div>
 
-    <!-- MASTER SEQUENTIAL GRID (#001 -> #008) -->
+    <!-- DYNAMIC AUTO-GENERATED GRID -->
     <div class="grid" id="guidesGrid">
-
-      <!-- ARTICLE #001 -->
-      <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#001</span>
-            <span class="tag">Architecture</span>
-          </div>
-          <h2>What Is Temporary Email and How Does It Work?</h2>
-          <p>A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #002 -->
-      <a href="guides/002-what-is-disposable-email.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#002</span>
-            <span class="tag">Guides</span>
-          </div>
-          <h2>What Is Disposable Email? (Complete Guide for Beginners)</h2>
-          <p>Discover what disposable email is, how temporary inboxes work, and practical safe usage for beginners.</p>
-        </div>
-        <div class="card-footer">
-          <span>5 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #003 -->
-      <a href="guides/003-how-long-does-temporary-email-last-before-expiring.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#003</span>
-            <span class="tag">Guides</span>
-          </div>
-          <h2>How Long Does Temporary Email Last Before Expiring?</h2>
-          <p>Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid lockouts.</p>
-        </div>
-        <div class="card-footer">
-          <span>5 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #004 -->
-      <a href="guides/004-are-temporary-emails-completely-anonymous-and-safe.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#004</span>
-            <span class="tag">Security & Privacy</span>
-          </div>
-          <h2>Are Temporary Emails Completely Anonymous and Safe?</h2>
-          <p>Understand the critical difference between inbox privacy and true online anonymity when using disposable email.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #005 -->
-      <a href="guides/005-how-does-temp-mail-work-behind-the-scenes.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#005</span>
-            <span class="tag">Architecture</span>
-          </div>
-          <h2>How Does Temp Mail Work Behind the Scenes?</h2>
-          <p>Technical breakdown of DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #006 -->
-      <a href="guides/006-difference-between-temporary-email-and-email-alias.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#006</span>
-            <span class="tag">Comparison</span>
-          </div>
-          <h2>Difference Between Temporary Email and Email Alias</h2>
-          <p>Compare lifespans, forwarding mechanisms, spam isolation, and recovery safety between temp mail and aliases.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #007 -->
-      <a href="guides/007-temporary-email-vs-permanent-email-privacy-comparison.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#007</span>
-            <span class="tag">Security & Privacy</span>
-          </div>
-          <h2>Temporary Email vs Permanent Email: Privacy Comparison</h2>
-          <p>Learn how data brokers track persistent inboxes, how disposable mail prevents profiling, and when to use each.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
-      <!-- ARTICLE #008 -->
-      <a href="guides/008-what-is-a-temporary-inbox-and-why-you-need-one.html" class="card">
-        <div>
-          <div class="card-top">
-            <span class="card-num">#008</span>
-            <span class="tag">Guides</span>
-          </div>
-          <h2>What Is a Temporary Inbox and Why You Need One</h2>
-          <p>Discover how disposable email stops spam, protects personal privacy, blocks tracking pixels, and prevents data leaks.</p>
-        </div>
-        <div class="card-footer">
-          <span>5 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-
+      <div class="loading-box">Fetching live guides directory...</div>
     </div>
   </main>
 
@@ -309,10 +183,100 @@
   </footer>
 
   <script>
-    function updateCounter() {
-      const cards = document.querySelectorAll('.card');
-      const countStr = String(cards.length).padStart(3, '0');
-      document.getElementById('autoCountBadge').innerText = `📚 Total Published Guides: ${countStr}`;
+    // ==========================================
+    // APNI GITHUB DETAILS YAHAN ENTER KAREIN
+    // ==========================================
+    const GITHUB_USER = "YOUR_GITHUB_USERNAME";  // Apna GitHub username dalein
+    const GITHUB_REPO = "YOUR_REPO_NAME";        // Apni repository ka naam dalein
+
+    // 1. SMART SLUG TO CLEAN TITLE CONVERTER
+    function formatTitleFromSlug(slug) {
+      let clean = slug.replace(/^\d+[-_]?/, '').replace(/\.html$/i, '');
+      return clean.split(/[-_]/).map(word => {
+        if (word.toLowerCase() === 'otp') return 'OTP';
+        if (word.toLowerCase() === 'vs') return 'vs.';
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      }).join(' ');
+    }
+
+    // 2. AUTO-CATEGORY DETECTOR FROM FILENAME
+    function getCategory(slug) {
+      const s = slug.toLowerCase();
+      if (s.includes('privacy') || s.includes('security') || s.includes('anonymous') || s.includes('safe')) return 'Security & Privacy';
+      if (s.includes('difference') || s.includes('vs') || s.includes('comparison')) return 'Comparison';
+      if (s.includes('architecture') || s.includes('behind-the-scenes') || s.includes('how-does-temp-mail-work')) return 'Architecture';
+      if (s.includes('discord') || s.includes('netflix') || s.includes('facebook')) return 'App Guides';
+      return 'Guides';
+    }
+
+    // 3. AUTO FETCH FROM GITHUB REPO (With 5-Min Local Cache to prevent API limits)
+    async function fetchGuidesAutomatically() {
+      const cacheKey = 'tm_guides_cache_v1';
+      const cached = localStorage.getItem(cacheKey);
+      const cacheTime = localStorage.getItem(cacheKey + '_time');
+
+      // Cache valid for 3 minutes
+      if (cached && cacheTime && (Date.now() - cacheTime < 180000)) {
+        renderGrid(JSON.parse(cached));
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/guides`);
+        if (!res.ok) throw new Error("API rate limit or invalid repo");
+        const files = await res.json();
+
+        const htmlFiles = files
+          .filter(f => f.name.endsWith('.html'))
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        const articles = htmlFiles.map(f => {
+          const idMatch = f.name.match(/^(\d+)/);
+          const id = idMatch ? idMatch[1] : "00";
+          return {
+            id: id,
+            title: formatTitleFromSlug(f.name),
+            category: getCategory(f.name),
+            url: `guides/${f.name}`,
+            desc: "Complete step-by-step instructions, safety tips, and technical guidance."
+          };
+        });
+
+        localStorage.setItem(cacheKey, JSON.stringify(articles));
+        localStorage.setItem(cacheKey + '_time', Date.now());
+        renderGrid(articles);
+      } catch (e) {
+        // Fallback if GitHub API is blocked: renders cached or baseline
+        if (cached) {
+          renderGrid(JSON.parse(cached));
+        } else {
+          document.getElementById('guidesGrid').innerHTML = '<div class="loading-box">Unable to fetch live feed. Please check GitHub User/Repo settings.</div>';
+        }
+      }
+    }
+
+    function renderGrid(articles) {
+      const grid = document.getElementById('guidesGrid');
+      const badge = document.getElementById('autoCountBadge');
+
+      badge.innerText = `📚 Total Published Guides: ${String(articles.length).padStart(3, '0')}`;
+
+      grid.innerHTML = articles.map(art => `
+        <a href="${art.url}" class="card">
+          <div>
+            <div class="card-top">
+              <span class="card-num">#${art.id}</span>
+              <span class="tag">${art.category}</span>
+            </div>
+            <h2>${art.title}</h2>
+            <p>${art.desc}</p>
+          </div>
+          <div class="card-footer">
+            <span>5 min read</span>
+            <span class="read-more">Read Guide →</span>
+          </div>
+        </a>
+      `).join('');
     }
 
     function filterCardsLive() {
@@ -325,8 +289,7 @@
       });
     }
 
-    updateCounter();
+    fetchGuidesAutomatically();
   </script>
-
 </body>
 </html>
