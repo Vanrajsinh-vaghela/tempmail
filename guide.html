@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y486RK7RLC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y486RK7RLC');
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Guides & Knowledge Base — TempMail Box</title>
-  <meta name="description" content="Explore categorized guides, technical tutorials, and tips on using disposable temporary email addresses safely.">
+  <title>User Guides & Knowledge Base Directory — TempMail Box</title>
+  <meta name="description" content="Complete master index of all user guides, tutorials, architecture breakdowns, and safety tips for temporary disposable email.">
   <link rel="canonical" href="https://tempmail.pdfgridbox.in/guide.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,29 +54,20 @@
     .nav a:hover { color: var(--gold); }
 
     .page { max-width: 1000px; margin: auto; padding: 40px 20px 80px; }
-    .hero { text-align: center; padding: 10px 0 25px; }
+    .hero { text-align: center; padding: 10px 0 20px; }
     .eyebrow { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px; }
     h1 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; color: #fff; }
-    .gold-line { height: 3px; max-width: 480px; margin: 18px auto 24px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
+    .gold-line { height: 3px; max-width: 480px; margin: 18px auto 20px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
     .hero p { color: var(--muted); font-size: 15px; max-width: 620px; margin: auto; }
 
-    /* Category Nav Jump Links */
-    .category-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 20px 0 45px; }
-    .cat-jump {
-      background: #0d0d0d; border: 1px solid #242424; color: #bbb;
-      padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
-      transition: .2s;
+    /* Total Articles Badge */
+    .stats-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #111; border: 1px solid #282828; padding: 6px 16px;
+      border-radius: 30px; font-size: 12px; color: var(--gold); font-weight: 700; margin: 15px 0 35px;
     }
-    .cat-jump:hover { background: var(--gold); color: #050505; border-color: var(--gold); font-weight: 700; }
 
-    /* Category Section Headings */
-    .category-title {
-      font-size: 20px; font-weight: 800; color: #fff; margin: 45px 0 20px;
-      display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1c1c1c; padding-bottom: 10px;
-    }
-    .category-title span { color: var(--gold); font-size: 14px; font-weight: 600; }
-
-    /* Cards Grid */
+    /* Grid Layout */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
     .card {
       background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
@@ -75,12 +75,14 @@
       justify-content: space-between; transition: transform .2s, border-color .2s;
     }
     .card:hover { transform: translateY(-4px); border-color: #443722; }
-    .card-num { font-size: 11px; color: var(--gold); font-weight: 800; margin-bottom: 6px; }
+    
+    .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-num { font-size: 12px; color: var(--gold); font-weight: 900; background: #161208; border: 1px solid #3d3118; padding: 2px 8px; border-radius: 6px; }
     .tag {
-      font-size: 10px; text-transform: uppercase; font-weight: 800; color: var(--gold);
-      background: #18140a; border: 1px solid #3d3118; padding: 4px 10px; border-radius: 6px;
-      display: inline-block; margin-bottom: 12px;
+      font-size: 10px; text-transform: uppercase; font-weight: 800; color: #bbb;
+      background: #161616; border: 1px solid #282828; padding: 3px 8px; border-radius: 6px;
     }
+
     .card h2 { font-size: 16px; line-height: 1.4; margin: 0 0 10px; font-weight: 700; color: #fff; }
     .card:hover h2 { color: var(--gold); }
     .card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin: 0 0 16px; }
@@ -122,29 +124,41 @@
 
   <main class="page">
     <section class="hero">
-      <span class="eyebrow">Categorized Knowledge Base</span>
-      <h1>User Guides & Articles</h1>
+      <span class="eyebrow">Master Knowledge Base</span>
+      <h1>User Guides Directory</h1>
       <div class="gold-line"></div>
-      <p>Browse tutorials and technical deep dives organized by category.</p>
+      <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
+      
+      <!-- Total Counter Badge -->
+      <div class="stats-badge">📚 Total Published Guides: 006</div>
     </section>
 
-    <!-- Quick Jump to Categories -->
-    <div class="category-nav">
-      <a href="#cat-guides" class="cat-jump">📖 Guides & Basics</a>
-      <a href="#cat-architecture" class="cat-jump">🏛️ Architecture & Tech</a>
-      <a href="#cat-security" class="cat-jump">🛡️ Security & Privacy</a>
-      <a href="#cat-comparisons" class="cat-jump">⚖️ Comparisons</a>
-    </div>
-
-    <!-- CATEGORY 1: GUIDES & BASICS -->
-    <div class="category-title" id="cat-guides">
-      📖 Guides & Beginner Fundamentals
-    </div>
+    <!-- MASTER SEQUENTIAL GRID (#001 -> #006) -->
     <div class="grid">
+
+      <!-- ARTICLE #001 -->
+      <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#001</span>
+            <span class="tag">Architecture</span>
+          </div>
+          <h2>What Is Temporary Email and How Does It Work?</h2>
+          <p>A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #002 -->
       <a href="guides/002-what-is-disposable-email.html" class="card">
         <div>
-          <div class="card-num">#002</div>
-          <span class="tag">Guides</span>
+          <div class="card-top">
+            <span class="card-num">#002</span>
+            <span class="tag">Guides</span>
+          </div>
           <h2>What Is Disposable Email? (Complete Guide for Beginners)</h2>
           <p>Discover what disposable email is, how temporary inboxes work, and practical safe usage for beginners.</p>
         </div>
@@ -154,31 +168,31 @@
         </div>
       </a>
 
+      <!-- ARTICLE #003 -->
       <a href="guides/003-how-long-does-temporary-email-last-before-expiring.html" class="card">
         <div>
-          <div class="card-num">#003</div>
-          <span class="tag">Guides</span>
+          <div class="card-top">
+            <span class="card-num">#003</span>
+            <span class="tag">Guides</span>
+          </div>
           <h2>How Long Does Temporary Email Last Before Expiring?</h2>
-          <p>Detailed breakdown of temporary email lifespans, timer models, and server deletion cycles.</p>
+          <p>Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid lockouts.</p>
         </div>
         <div class="card-footer">
           <span>5 min read</span>
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
-    </div>
 
-    <!-- CATEGORY 2: ARCHITECTURE & TECH -->
-    <div class="category-title" id="cat-architecture">
-      🏛️ Technical Architecture & Server Mechanics
-    </div>
-    <div class="grid">
-      <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
+      <!-- ARTICLE #004 -->
+      <a href="guides/004-are-temporary-emails-completely-anonymous-and-safe.html" class="card">
         <div>
-          <div class="card-num">#001</div>
-          <span class="tag">Architecture</span>
-          <h2>What Is Temporary Email and How Does It Work?</h2>
-          <p>A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy.</p>
+          <div class="card-top">
+            <span class="card-num">#004</span>
+            <span class="tag">Security & Privacy</span>
+          </div>
+          <h2>Are Temporary Emails Completely Anonymous and Safe?</h2>
+          <p>Understand the critical difference between inbox privacy and true online anonymity when using disposable email.</p>
         </div>
         <div class="card-footer">
           <span>6 min read</span>
@@ -186,10 +200,13 @@
         </div>
       </a>
 
+      <!-- ARTICLE #005 -->
       <a href="guides/005-how-does-temp-mail-work-behind-the-scenes.html" class="card">
         <div>
-          <div class="card-num">#005</div>
-          <span class="tag">Architecture</span>
+          <div class="card-top">
+            <span class="card-num">#005</span>
+            <span class="tag">Architecture</span>
+          </div>
           <h2>How Does Temp Mail Work Behind the Scenes?</h2>
           <p>Technical breakdown of DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.</p>
         </div>
@@ -198,46 +215,24 @@
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
-    </div>
 
-    <!-- CATEGORY 3: SECURITY & PRIVACY -->
-    <div class="category-title" id="cat-security">
-      🛡️ Security, Privacy & Safety Realities
-    </div>
-    <div class="grid">
-      <a href="guides/004-are-temporary-emails-completely-anonymous-and-safe.html" class="card">
-        <div>
-          <div class="card-num">#004</div>
-          <span class="tag">Security & Privacy</span>
-          <h2>Are Temporary Emails Completely Anonymous and Safe?</h2>
-          <p>Understand the critical difference between inbox privacy and true online anonymity.</p>
-        </div>
-        <div class="card-footer">
-          <span>6 min read</span>
-          <span class="read-more">Read Guide →</span>
-        </div>
-      </a>
-    </div>
-
-    <!-- CATEGORY 4: COMPARISONS -->
-    <div class="category-title" id="cat-comparisons">
-      ⚖️ Comparisons & Alternatives
-    </div>
-    <div class="grid">
+      <!-- ARTICLE #006 -->
       <a href="guides/006-difference-between-temporary-email-and-email-alias.html" class="card">
         <div>
-          <div class="card-num">#006</div>
-          <span class="tag">Comparison</span>
+          <div class="card-top">
+            <span class="card-num">#006</span>
+            <span class="tag">Comparison</span>
+          </div>
           <h2>Difference Between Temporary Email and Email Alias</h2>
-          <p>Compare lifespans, forwarding mechanisms, spam isolation, and recovery safety side by side.</p>
+          <p>Compare lifespans, forwarding mechanisms, spam isolation, and recovery safety between temp mail and aliases.</p>
         </div>
         <div class="card-footer">
           <span>6 min read</span>
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
-    </div>
 
+    </div>
   </main>
 
   <footer class="site-footer">
