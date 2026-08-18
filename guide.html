@@ -1,5 +1,3 @@
----
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,14 +60,12 @@
     .gold-line { height: 3px; max-width: 480px; margin: 18px auto 20px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
     .hero p { color: var(--muted); font-size: 15px; max-width: 620px; margin: auto; }
 
-    /* Total Articles Badge */
     .stats-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: #111; border: 1px solid #282828; padding: 6px 16px;
       border-radius: 30px; font-size: 12px; color: var(--gold); font-weight: 700; margin: 15px 0 25px;
     }
 
-    /* In-Page Quick Search */
     .search-box { max-width: 480px; margin: 0 auto 35px; position: relative; }
     .search-input {
       width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
@@ -79,7 +75,6 @@
     .search-input:focus { border-color: var(--gold); }
     .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; font-size: 14px; }
 
-    /* Grid Layout */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
     .card {
       background: linear-gradient(180deg, #0d0d0d, #080808); border: 1px solid var(--line);
@@ -140,11 +135,8 @@
       <h1>User Guides Directory</h1>
       <div class="gold-line"></div>
       <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
-
-      {% assign all_guides = site.pages | where_exp: "item", "item.path contains 'guides/'" | sort: "path" %}
       
-      <!-- Auto-Calculated Counter -->
-      <div class="stats-badge">📚 Total Published Guides: {{ all_guides.size }}</div>
+      <div class="stats-badge">📚 Total Published Guides: 007</div>
     </section>
 
     <!-- In-Page Fast Filter -->
@@ -153,24 +145,121 @@
       <input type="text" id="liveSearchInput" class="search-input" placeholder="Quick search guides by title or #number..." onkeyup="filterCardsLive()">
     </div>
 
-    <!-- AUTOMATIC JEKYLL GENERATED GRID -->
+    <!-- MASTER SEQUENTIAL GRID (#001 -> #007) -->
     <div class="grid" id="guidesGrid">
-      {% for guide in all_guides %}
-      <a href="{{ guide.url | relative_url }}" class="card">
+
+      <!-- ARTICLE #001 -->
+      <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
         <div>
           <div class="card-top">
-            <span class="card-num">#{{ guide.guide_id | default: "00" }}</span>
-            <span class="tag">{{ guide.category | default: "Guides" }}</span>
+            <span class="card-num">#001</span>
+            <span class="tag">Architecture</span>
           </div>
-          <h2>{{ guide.title | default: guide.name }}</h2>
-          <p>{{ guide.description | default: "Step-by-step instructions and safety tips." }}</p>
+          <h2>What Is Temporary Email and How Does It Work?</h2>
+          <p>A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #002 -->
+      <a href="guides/002-what-is-disposable-email.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#002</span>
+            <span class="tag">Guides</span>
+          </div>
+          <h2>What Is Disposable Email? (Complete Guide for Beginners)</h2>
+          <p>Discover what disposable email is, how temporary inboxes work, and practical safe usage for beginners.</p>
         </div>
         <div class="card-footer">
           <span>5 min read</span>
           <span class="read-more">Read Guide →</span>
         </div>
       </a>
-      {% endfor %}
+
+      <!-- ARTICLE #003 -->
+      <a href="guides/003-how-long-does-temporary-email-last-before-expiring.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#003</span>
+            <span class="tag">Guides</span>
+          </div>
+          <h2>How Long Does Temporary Email Last Before Expiring?</h2>
+          <p>Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid lockouts.</p>
+        </div>
+        <div class="card-footer">
+          <span>5 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #004 -->
+      <a href="guides/004-are-temporary-emails-completely-anonymous-and-safe.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#004</span>
+            <span class="tag">Security & Privacy</span>
+          </div>
+          <h2>Are Temporary Emails Completely Anonymous and Safe?</h2>
+          <p>Understand the critical difference between inbox privacy and true online anonymity when using disposable email.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #005 -->
+      <a href="guides/005-how-does-temp-mail-work-behind-the-scenes.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#005</span>
+            <span class="tag">Architecture</span>
+          </div>
+          <h2>How Does Temp Mail Work Behind the Scenes?</h2>
+          <p>Technical breakdown of DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #006 -->
+      <a href="guides/006-difference-between-temporary-email-and-email-alias.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#006</span>
+            <span class="tag">Comparison</span>
+          </div>
+          <h2>Difference Between Temporary Email and Email Alias</h2>
+          <p>Compare lifespans, forwarding mechanisms, spam isolation, and recovery safety between temp mail and aliases.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
+      <!-- ARTICLE #007 -->
+      <a href="guides/007-temporary-email-vs-permanent-email-privacy-comparison.html" class="card">
+        <div>
+          <div class="card-top">
+            <span class="card-num">#007</span>
+            <span class="tag">Privacy & Security</span>
+          </div>
+          <h2>Temporary Email vs Permanent Email: Privacy Comparison</h2>
+          <p>Learn how data brokers track persistent inboxes, how disposable mail prevents profiling, and when to use each.</p>
+        </div>
+        <div class="card-footer">
+          <span>6 min read</span>
+          <span class="read-more">Read Guide →</span>
+        </div>
+      </a>
+
     </div>
   </main>
 
