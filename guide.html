@@ -54,7 +54,7 @@
     .nav a:hover { color: var(--gold); }
 
     .page { max-width: 1000px; margin: auto; padding: 40px 20px 80px; }
-    .hero { text-align: center; padding: 10px 0 20px; }
+    .hero { text-align: center; padding: 10px 0 15px; }
     .eyebrow { font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 800; display: inline-block; margin-bottom: 10px; }
     h1 { font-size: clamp(30px, 5.5vw, 48px); line-height: 1.1; margin: 10px 0 16px; font-weight: 900; color: #fff; }
     .gold-line { height: 3px; max-width: 480px; margin: 18px auto 20px; background: linear-gradient(90deg, var(--gold), var(--gold2), #33251c); }
@@ -64,8 +64,18 @@
     .stats-badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: #111; border: 1px solid #282828; padding: 6px 16px;
-      border-radius: 30px; font-size: 12px; color: var(--gold); font-weight: 700; margin: 15px 0 35px;
+      border-radius: 30px; font-size: 12px; color: var(--gold); font-weight: 700; margin: 15px 0 25px;
     }
+
+    /* In-Page Quick Search */
+    .search-box { max-width: 480px; margin: 0 auto 35px; position: relative; }
+    .search-input {
+      width: 100%; background: #0c0c0c; border: 1px solid #2a2a2a;
+      border-radius: 12px; padding: 12px 18px 12px 42px; color: #fff;
+      font-size: 14px; font-family: inherit; outline: none; transition: .2s;
+    }
+    .search-input:focus { border-color: var(--gold); }
+    .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #666; font-size: 14px; }
 
     /* Grid Layout */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; }
@@ -129,12 +139,18 @@
       <div class="gold-line"></div>
       <p>Browse all published tutorials, security analyses, and technical guides in exact chronological sequence.</p>
       
-      <!-- Total Counter Badge -->
-      <div class="stats-badge">📚 Total Published Guides: 006</div>
+      <!-- Auto-Calculated Counter Badge -->
+      <div class="stats-badge" id="autoCountBadge">📚 Total Published Guides: ...</div>
     </section>
 
-    <!-- MASTER SEQUENTIAL GRID (#001 -> #006) -->
-    <div class="grid">
+    <!-- In-Page Fast Filter -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="liveSearchInput" class="search-input" placeholder="Quick search guides by title or #number..." onkeyup="filterCardsLive()">
+    </div>
+
+    <!-- MASTER SEQUENTIAL GRID (#001 -> #006+) -->
+    <div class="grid" id="guidesGrid">
 
       <!-- ARTICLE #001 -->
       <a href="guides/001-what-is-temporary-email-and-how-does-it-work.html" class="card">
@@ -263,6 +279,28 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // 1. Auto-Count Total Cards on Page
+    function updateCounter() {
+      const cards = document.querySelectorAll('.card');
+      const countStr = String(cards.length).padStart(3, '0');
+      document.getElementById('autoCountBadge').innerText = `📚 Total Published Guides: ${countStr}`;
+    }
+
+    // 2. Instant In-Page Search Filter (0ms delay, No APIs)
+    function filterCardsLive() {
+      const input = document.getElementById('liveSearchInput').value.toLowerCase().trim();
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(input) ? 'flex' : 'none';
+      });
+    }
+
+    updateCounter();
+  </script>
 
 </body>
 </html>
