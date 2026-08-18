@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Guides</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: 30px auto; padding: 0 15px; }
+    .search-box { width: 100%; padding: 10px; margin-bottom: 20px; box-sizing: border-box; }
+    .guide-card { display: block; padding: 12px 15px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; }
+    .guide-card:hover { background: #f4f4f4; border-color: #0070f3; }
+  </style>
+</head>
+<body>
+  <h1>All Temp Mail Guides</h1>
+  <input type="text" id="search" class="search-box" placeholder="Search guides..." onkeyup="filter()">
+  <div id="guides-list">Loading articles...</div>
+
+  <script>
+    // Apne GitHub Username aur Repo ka naam yahan likho
+    const USERNAME = "YOUR_GITHUB_USERNAME";
+    const REPO = "YOUR_REPO_NAME";
+
+    async function loadGuides() {
+      const container = document.getElementById("guides-list");
+      try {
+        const res = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/guides`);
+        const files = await res.json();
+        
+        const htmlFiles = files.filter(f => f.name.endsWith('.html') && f.name !== 'index.html');
+        container.innerHTML = "";
+
+        htmlFiles.forEach(f => {
+          // File name se readable title banana (e.g. 001-what-is -> What Is)
+          let cleanTitle = f.name.replace('.html', '').replace(/^[0-9]+-/, '').replace(/-/g, ' ');
+          cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+
+          const a = document.createElement("a");
+          a.href = f.name;
+          a.className = "guide-card";
+          a.innerText = cleanTitle;
+          container.appendChild(a);
+        });
+      } catch (err) {
+        container.innerText = "Error loading guides.";
+      }
+    }
+
+    function filter() {
+      const q = document.getElementById("search").value.toLowerCase();
+      document.querySelectorAll(".guide-card").forEach(el => {
+        el.style.display = el.innerText.toLowerCase().includes(q) ? "block" : "none";
+      });
+    }
+
+    loadGuides();
+  </script>
+</body>
+</html>
