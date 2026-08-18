@@ -202,68 +202,52 @@
 
   <script>
     // ========================================================
-    // 📚 MASTER ARTICLES DATABASE (Instant Local Load, 0 Errors)
+    // 📚 5 MASTER ARTICLES (100% MATCHED WITH GITHUB FILES)
     // ========================================================
     const allArticles = [
       {
         id: "001",
-        category: "OTP & Verification",
-        title: "Temporary Email for OTP: How to Receive Verification Codes Safely",
-        desc: "Learn how to safely use disposable email for receiving short-term OTPs and verification messages without risking personal inbox privacy.",
-        url: "guides/001-temporary-email-for-otp.html",
-        readTime: "5 min read"
+        category: "Architecture",
+        title: "What Is Temporary Email and How Does It Work?",
+        desc: "A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.",
+        url: "guides/001-what-is-temporary-email-and-how-does-it-work.html",
+        readTime: "6 min read"
       },
       {
         id: "002",
         category: "Guides",
         title: "What Is Disposable Email? (Complete Guide for Beginners)",
-        desc: "Discover what disposable email is, how temporary inboxes work, key benefits for spam prevention, privacy realities, and practical safe usage.",
+        desc: "Discover what disposable email is, how temporary inboxes work, key benefits for spam prevention, and practical safe usage.",
         url: "guides/002-what-is-disposable-email.html",
         readTime: "5 min read"
       },
       {
         id: "003",
-        category: "Architecture",
-        title: "What Is Temporary Email and How Does It Work?",
-        desc: "A complete deep dive into disposable email architecture, MX routing, ephemeral databases, and privacy protection.",
-        url: "guides/003-what-is-temporary-email-and-how-does-it-work.html",
-        readTime: "6 min read"
+        category: "Guides",
+        title: "How Long Does Temporary Email Last Before Expiring?",
+        desc: "Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid losing verification access.",
+        url: "guides/003-how-long-does-temporary-email-last-before-expiring.html",
+        readTime: "5 min read"
       },
       {
         id: "004",
         category: "Security & Privacy",
-        title: "Is Temporary Email Safe? Risks, Privacy Realities & Best Practices",
-        desc: "Learn about the security realities, data retention models, and practical safety precautions when using disposable email services.",
-        url: "guides/004-is-temporary-email-safe.html",
-        readTime: "5 min read"
-      },
-      {
-        id: "005",
-        category: "Guides",
-        title: "How Long Does Temporary Email Last Before Expiring?",
-        desc: "Detailed breakdown of temporary email lifespans, timer models, server deletion cycles, and how to avoid losing verification access.",
-        url: "guides/005-how-long-does-temporary-email-last-before-expiring.html",
-        readTime: "5 min read"
-      },
-      {
-        id: "006",
-        category: "Security & Privacy",
         title: "Are Temporary Emails Completely Anonymous and Safe?",
         desc: "Understand the critical difference between inbox privacy and true online anonymity when using disposable email services.",
-        url: "guides/006-are-temporary-emails-completely-anonymous-and-safe.html",
+        url: "guides/004-are-temporary-emails-completely-anonymous-and-safe.html",
         readTime: "6 min read"
       },
       {
-        id: "007",
+        id: "005",
         category: "Architecture",
         title: "How Does Temp Mail Work Behind the Scenes?",
         desc: "A comprehensive technical breakdown of disposable mail systems: DNS MX routing, catch-all SMTP receivers, and ephemeral cache management.",
-        url: "guides/007-how-does-temp-mail-work-behind-the-scenes.html",
+        url: "guides/005-how-does-temp-mail-work-behind-the-scenes.html",
         readTime: "6 min read"
       }
     ];
 
-    const ITEMS_PER_PAGE = 12; // 12 cards per page
+    const ITEMS_PER_PAGE = 12;
     let filteredList = [];
     let currentPage = 1;
     let activeCategory = 'All';
@@ -322,7 +306,7 @@
       const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, filteredList.length);
       const currentItems = filteredList.slice(startIndex, endIndex);
 
-      statsBar.innerText = `Showing ${startIndex + 1}–${endIndex} of ${filteredList.length} articles (Page ${currentPage})`;
+      statsBar.innerText = `Showing ${startIndex + 1}–${endIndex} of ${filteredList.length} articles`;
 
       grid.innerHTML = currentItems.map(item => `
         <a href="${item.url}" class="card article-item">
@@ -349,22 +333,13 @@
         return;
       }
 
-      let html = `
-        <button class="page-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>
-      `;
+      let html = `<button class="page-btn" onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Prev</button>`;
 
       for (let i = 1; i <= totalPages; i++) {
-        if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
-          html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
-        } else if (i === currentPage - 2 || i === currentPage + 2) {
-          html += `<span class="page-ellipsis">...</span>`;
-        }
+        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
       }
 
-      html += `
-        <button class="page-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>
-      `;
-
+      html += `<button class="page-btn" onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
       container.innerHTML = html;
     }
 
@@ -377,7 +352,6 @@
       document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Direct render on load
     initPage();
   </script>
 </body>
