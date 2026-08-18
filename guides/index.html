@@ -3,54 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Guides</title>
+  <title>All Temp Mail Guides</title>
   <link rel="stylesheet" href="../assets/style.css">
   <style>
-    body { font-family: sans-serif; max-width: 700px; margin: 30px auto; padding: 0 15px; }
-    .search-box { width: 100%; padding: 10px; margin-bottom: 20px; box-sizing: border-box; }
-    .guide-card { display: block; padding: 12px 15px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; }
-    .guide-card:hover { background: #f4f4f4; border-color: #0070f3; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 750px; margin: 30px auto; padding: 0 16px; color: #1e293b; }
+    h1 { font-size: 26px; margin-bottom: 6px; }
+    p.sub { color: #64748b; margin-bottom: 20px; font-size: 14px; }
+    .back-btn { display: inline-block; margin-bottom: 16px; text-decoration: none; color: #2563eb; font-size: 14px; font-weight: 500; }
+    .search-box { width: 100%; padding: 12px 14px; margin-bottom: 20px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 15px; box-sizing: border-box; }
+    .guide-grid { display: flex; flex-direction: column; gap: 8px; }
+    .guide-card { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: #0f172a; background: #fff; transition: all 0.2s; }
+    .guide-card:hover { border-color: #3b82f6; background: #f8fafc; transform: translateX(3px); }
+    .guide-num { font-weight: bold; color: #3b82f6; margin-right: 8px; }
+    .guide-arrow { color: #94a3b8; }
   </style>
 </head>
 <body>
-  <h1>All Temp Mail Guides</h1>
-  <input type="text" id="search" class="search-box" placeholder="Search guides..." onkeyup="filter()">
-  <div id="guides-list">Loading articles...</div>
+  <a href="/" class="back-btn">← Back to Home</a>
+  <h1>Temp Mail Guides & Knowledge Base</h1>
+  <p class="sub" id="count-info">Loading guides...</p>
+
+  <input type="text" id="search" class="search-box" placeholder="Search guides..." onkeyup="filterGuides()">
+  
+  <div class="guide-grid" id="guides-list">
+    <p>Fetching all articles...</p>
+  </div>
 
   <script>
-    // Apne GitHub Username aur Repo ka naam yahan likho
-    const USERNAME = "YOUR_GITHUB_USERNAME";
-    const REPO = "YOUR_REPO_NAME";
+    const USERNAME = "Vanrajsinh-vaghela";
+    const REPO = "tempmail";
 
     async function loadGuides() {
       const container = document.getElementById("guides-list");
-      try {
-        const res = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/guides`);
-        const files = await res.json();
-        
-        const htmlFiles = files.filter(f => f.name.endsWith('.html') && f.name !== 'index.html');
-        container.innerHTML = "";
+      const countInfo = document.getElementById("count-info");
 
-        htmlFiles.forEach(f => {
-          // File name se readable title banana (e.g. 001-what-is -> What Is)
-          let cleanTitle = f.name.replace('.html', '').replace(/^[0-9]+-/, '').replace(/-/g, ' ');
-          cleanTitle = cleanTitle.charAt(0).toUpperCase() + cleanTitle.slice(1);
+      try {
+        const response = await fetch(`https://api.github.com/repos/${USERNAME}/${REPO}/contents/guides`);
+        const files = await response.json();
+
+        // Sirf .html files filter karega aur index.html ko ignore karega
+        const htmlFiles = files
+          .filter(f => f.name.endsWith('.html') && f.name !== 'index.html')
+          .sort((a, b) => a.name.localeCompare(b.name));
+
+        container.innerHTML = "";
+        countInfo.innerText = `Browse all ${htmlFiles.length} temporary email tutorials.`;
+
+        htmlFiles.forEach(file => {
+          // File name format (e.g. 001-what-is-email.html -> #001 What Is Email)
+          const match = file.name.match(/^(\d+)-(.*)\.html$/);
+          let num = match ? match[1] : "";
+          let rawTitle = match ? match[2] : file.name.replace('.html', '');
+          
+          let title = rawTitle.replace(/-/g, ' ');
+          title = title.charAt(0).toUpperCase() + title.slice(1);
 
           const a = document.createElement("a");
-          a.href = f.name;
+          a.href = file.name;
           a.className = "guide-card";
-          a.innerText = cleanTitle;
+          a.innerHTML = `
+            <div>
+              ${num ? `<span class="guide-num">#${num}</span>` : ''}
+              <span>${title}</span>
+            </div>
+            <span class="guide-arrow">→</span>
+          `;
           container.appendChild(a);
         });
+
       } catch (err) {
-        container.innerText = "Error loading guides.";
+        container.innerHTML = "<p>Guides load karne me error aayi. Please refresh karein.</p>";
+        countInfo.innerText = "";
       }
     }
 
-    function filter() {
-      const q = document.getElementById("search").value.toLowerCase();
-      document.querySelectorAll(".guide-card").forEach(el => {
-        el.style.display = el.innerText.toLowerCase().includes(q) ? "block" : "none";
+    function filterGuides() {
+      const query = document.getElementById("search").value.toLowerCase();
+      document.querySelectorAll(".guide-card").forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(query) ? "flex" : "none";
       });
     }
 
